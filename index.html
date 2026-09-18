@@ -231,19 +231,76 @@ h1 {
     <div class="payment-methods">
         <h3>طرق الدفع المتاحة</h3>
         <p style="color: var(--text-muted);">اضغط على الوسيلة للتحويل أو نسخ الرقم بسهولة:</p>
-        <div class="payment-icons">
-            
-            <!-- زر فودافون كاش المباشر -->
-            <a href="tel:*9*7*01555557031#" class="pay-tag-link">
-                📱 فودافون كاش: 01555557031
-            </a>
+      <!-- بداية كود طرق الدفع الجديد -->
+<div class="payment-container">
+  <h2>طرق الدفع المتاحة</h2>
+  <p class="sub-title">اضغط على الوسيلة للتحويل بسهولة:</p>
 
-            <!-- زر إنستا باي المباشر -->
-          <a href="https://ipn.eg/S/ehab_el_shrif/instapay/7itHY8" target="_blank" class="btn-instapay">
-  ادفع عبر إنستا باي (InstaPay)
-</a>
+  <div class="payment-options">
+    
+    <!-- زر فودافون كاش -->
+    <a href="tel:01555557031" class="payment-box vodafone">
+      <span>📱 فودافون كاش: <strong>01555557031</strong></span>
+    </a>
 
-        </div>
+    <!-- زر إنستا باي المباشر -->
+    <a href="https://ipn.eg/S/ehab_el_shrif/instapay/7itHY8" target="_blank" class="payment-box instapay">
+      <span>⚡ ادفع عبر إنستا باي (InstaPay)</span>
+    </a>
+
+  </div>
+</div>
+
+<style>
+  .payment-container {
+    background-color: #1a1a1a;
+    padding: 25px 20px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 450px;
+    margin: 0 auto;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .payment-container h2 {
+    color: #ffffff !important;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .payment-container .sub-title {
+    color: #b3b3b3 !important;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .payment-box {
+    display: block;
+    background-color: #2a2a2a;
+    color: #ffffff !important; /* لون الخط أبيض ناصع */
+    font-size: 18px;
+    font-weight: bold; /* خط تخين وواضح */
+    text-decoration: none !important;
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: 1px solid #3d3d3d;
+    transition: all 0.2s ease;
+  }
+
+  .payment-box:hover {
+    background-color: #353535;
+    border-color: #555555;
+    transform: translateY(-2px);
+  }
+</style>
+<!-- نهاية كود طرق الدفع الجديد -->
     </div>
 </section>
     </div>
