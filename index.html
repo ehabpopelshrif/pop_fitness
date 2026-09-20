@@ -70,9 +70,9 @@
     object-fit: cover;
     object-position: 50% 14%;
     border: 4px solid var(--orange);
-    box-shadow: 0 0 0 10px rgba(255,77,0,.18), 0 20px 50px rgba(0,0,0,.6);
+    outline: 8px solid rgba(255,77,0,.16);
+    filter: drop-shadow(0 20px 28px rgba(0,0,0,.55));
     margin-bottom: 26px;
-    animation: rise .8s ease both;
   }
 
   .hero h1 {
@@ -83,7 +83,6 @@
     margin: 0 0 14px;
     letter-spacing: -1px;
     text-shadow: 0 6px 30px rgba(0,0,0,.8);
-    animation: rise .8s .1s ease both;
   }
 
   .tagline {
@@ -94,7 +93,6 @@
     margin: 0 0 22px;
     direction: ltr;
     text-shadow: 0 2px 14px rgba(0,0,0,.9);
-    animation: rise .8s .18s ease both;
   }
 
   .exp {
@@ -106,7 +104,6 @@
     border-radius: 999px;
     font-weight: 500;
     margin-bottom: 34px;
-    animation: rise .8s .26s ease both;
   }
 
   .hero-actions {
@@ -114,7 +111,6 @@
     flex-wrap: wrap;
     gap: 14px;
     justify-content: center;
-    animation: rise .8s .34s ease both;
   }
 
   @keyframes rise {
@@ -454,6 +450,98 @@
   }
   .logout-btn:hover { border-color: var(--ember); color: var(--ember); }
 
+  /* ========== MOTION ========== */
+  @keyframes rise      { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes revealIn  { from { opacity: 0; translate: 0 26px; } to { opacity: 1; translate: 0 0; } }
+  @keyframes cardIn    { from { opacity: 0; transform: translateY(26px) scale(.95); } to { opacity: 1; transform: none; } }
+  @keyframes gateOut   { to { opacity: 0; transform: scale(1.04); } }
+  @keyframes paneIn    { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
+  @keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(255,77,0,.55); } 70%, 100% { box-shadow: 0 0 0 22px rgba(255,77,0,0); } }
+  @keyframes glow      { 0%, 100% { box-shadow: 0 10px 30px rgba(255,77,0,.35); } 50% { box-shadow: 0 10px 46px rgba(255,77,0,.8); } }
+  @keyframes drift     { from { translate: -40px 0; } to { translate: 50px 36px; } }
+  @keyframes bob       { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+  @keyframes ping      { 0% { transform: scale(1); opacity: .7; } 80%, 100% { transform: scale(1.7); opacity: 0; } }
+  @keyframes cue       { 0%, 100% { translate: 0 0; opacity: .55; } 50% { translate: 0 9px; opacity: 1; } }
+  @keyframes itemIn    { from { opacity: 0; translate: 0 12px; } to { opacity: 1; translate: 0 0; } }
+
+  /* hero entrance: starts when the gate closes */
+  body:not(.locked) .avatar { animation: rise .8s ease both, pulseRing 3s 1.2s ease-out infinite; }
+  body:not(.locked) .hero h1 { animation: rise .8s .12s ease both; }
+  body:not(.locked) .tagline { animation: rise .8s .22s ease both; }
+  body:not(.locked) .exp { animation: rise .8s .32s ease both; }
+  body:not(.locked) .welcome { animation: rise .8s .4s ease both; }
+  body:not(.locked) .hero-actions { animation: rise .8s .48s ease both; }
+  body:not(.locked) .hero-actions .btn-primary { animation: glow 2.6s 1.4s ease-in-out infinite; }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 62px;
+    left: 0; right: 0;
+    margin: 0 auto;
+    width: 34px; height: 34px;
+    display: grid; place-items: center;
+    color: #fff;
+    opacity: 0;
+  }
+  .scroll-cue svg { width: 26px; height: 26px; }
+  body:not(.locked) .scroll-cue { animation: cue 1.8s 1.6s ease-in-out infinite; }
+
+  /* scroll reveal (classes added by JS) */
+  .reveal:not(.in) { opacity: 0; translate: 0 26px; }
+  .reveal.in { animation: revealIn .7s cubic-bezier(.2,.7,.2,1) both; animation-delay: var(--d, 0s); }
+
+  .flag { animation: bob 2.4s ease-in-out infinite; }
+  .float-wa::after {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 2px solid #1ea952;
+    animation: ping 2.4s ease-out infinite;
+    pointer-events: none;
+  }
+
+  .plan { transition: transform .3s ease, border-color .3s ease; }
+  .cert { transition: transform .25s ease, border-color .25s ease, background .25s ease; }
+  @media (hover: hover) {
+    .plan:hover { transform: translateY(-6px); border-color: #444; }
+    .plan.featured:hover { transform: translateY(-16px); border-color: transparent; }
+    .cert:hover { transform: translateY(-3px); background: var(--panel-2); }
+  }
+
+  /* gate */
+  .gate { overflow-x: hidden; }
+  .gate::before {
+    content: "";
+    position: absolute;
+    top: -200px; left: 50%;
+    width: 520px; height: 520px;
+    margin-left: -260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,77,0,.3), transparent 65%);
+    filter: blur(8px);
+    pointer-events: none;
+    animation: drift 9s ease-in-out infinite alternate;
+  }
+  .gate:not([hidden]) .gate-card { position: relative; animation: cardIn .7s cubic-bezier(.2,.7,.2,1) both; }
+  .gate.closing { animation: gateOut .42s ease forwards; pointer-events: none; }
+  #pane-client:not([hidden]), #pane-admin:not([hidden]) { animation: paneIn .35s ease both; }
+  .gate-avatar {
+    display: block;
+    width: 108px; height: 108px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 14%;
+    border: 3px solid var(--orange);
+    outline: 5px solid rgba(255,77,0,.16);
+    animation: pulseRing 3s ease-out infinite;
+  }
+  .gate-card .brand { margin-bottom: 18px; }
+
+  /* admin list */
+  #admin-app .item { animation: itemIn .45s ease both; animation-delay: calc(var(--i, 0) * 45ms); }
+  #admin-app .stat { animation: itemIn .5s ease both; }
+
   @media (max-width: 640px) {
     body { font-size: 16px; }
     section { padding-top: 64px; }
@@ -530,6 +618,7 @@
 <!-- ========== LOGIN GATE ========== -->
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
   <div class="gate-card">
+    <img class="gate-avatar" src="captain.jpeg" alt="الكابتن إيهاب الشريف">
     <h1 class="brand" id="gate-title">Captain POP</h1>
     <div class="tabs" role="tablist">
       <button type="button" class="tab active" role="tab" data-tab="client" aria-selected="true">أنا عميل</button>
@@ -585,6 +674,10 @@
       </a>
     </div>
   </div>
+
+  <a class="scroll-cue" href="#certs" aria-label="انزل لتحت">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  </a>
 </header>
 
 <main>
@@ -778,6 +871,59 @@
   // لو عايز البيانات توصلك: حط هنا رابط Google Apps Script (Web App) وسيبه فاضي لو مش عايز.
   var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbx6bveksk4NZWq9_BdqYUi_F1MgmQsYsIoCusSiEWxMT2SoHkk3lK68jR9cJnCD9uY/exec";
 
+  // ===== حركة الظهور عند النزول في الصفحة + عدّاد الأرقام =====
+  window.initReveal = function () {
+    if (window.__revealDone) return;
+    window.__revealDone = true;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var targets = [];
+
+    function mark(sel, step) {
+      document.querySelectorAll(sel).forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--d', (i * step) + 's');
+        targets.push(el);
+      });
+    }
+    mark('.section-head', 0);
+    mark('.facts-grid .fact', 0.1);
+    mark('.cert', 0.08);
+    mark('.plan', 0.12);
+    mark('.contact-list .row', 0.08);
+
+    function countUp(b) {
+      var m = b.textContent.trim().match(/^(\D*)(\d+)(\D*)$/);
+      if (!m || reduce) return;
+      var to = parseInt(m[2], 10), t0 = null;
+      b.textContent = m[1] + '0' + m[3];
+      function step(t) {
+        if (!t0) t0 = t;
+        var p = Math.min((t - t0) / 1200, 1);
+        b.textContent = m[1] + Math.round(to * (1 - Math.pow(1 - p, 3))) + m[3];
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    if (reduce || !('IntersectionObserver' in window)) {
+      targets.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        el.classList.add('in');
+        io.unobserve(el);
+        if (el.classList.contains('fact')) countUp(el.querySelector('b'));
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    targets.forEach(function (el) { io.observe(el); });
+  };
+
   (function () {
     var gate = document.getElementById('gate');
     var form = document.getElementById('gate-form');
@@ -785,9 +931,15 @@
     var phoneEl = document.getElementById('g-phone');
     var KEY = 'captainpop_visitor';
 
-    function unlock(user) {
-      gate.hidden = true;
+    function unlock(user, animate) {
       document.body.classList.remove('locked');
+      if (animate) {
+        gate.classList.add('closing');
+        setTimeout(function () { gate.hidden = true; gate.classList.remove('closing'); }, 420);
+      } else {
+        gate.hidden = true;
+      }
+      if (window.initReveal) window.initReveal();
       if (user && user.name) {
         document.getElementById('welcome-name').textContent = user.name;
         document.getElementById('welcome').hidden = false;
@@ -904,7 +1056,7 @@
           fetch(LEAD_ENDPOINT + qs, { method: 'GET', mode: 'no-cors', keepalive: true });
         } catch (err) {}
       }
-      unlock(user);
+      unlock(user, true);
     });
   })();
 
@@ -993,8 +1145,9 @@
         return;
       }
 
-      shown.forEach(function (r) {
+      shown.forEach(function (r, i) {
         var item = document.createElement('div'); item.className = 'item';
+        item.style.setProperty('--i', Math.min(i, 12));
 
         var who = document.createElement('div'); who.className = 'who';
         var n = document.createElement('strong'); n.textContent = r.name;
