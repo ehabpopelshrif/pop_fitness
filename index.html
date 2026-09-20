@@ -439,6 +439,20 @@
   .gate-msg { min-height: 1.4em; margin: 14px 0 0; font-size: .92rem; color: #ff7b7b; }
   .admin-link { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
   .admin-link:hover { color: var(--ember); }
+  .footer-actions { margin-top: 14px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .logout-btn {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--text);
+    background: transparent;
+    border: 1.5px solid #454545;
+    border-radius: 999px;
+    padding: 10px 28px;
+    cursor: pointer;
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .logout-btn:hover { border-color: var(--ember); color: var(--ember); }
 
   @media (max-width: 640px) {
     body { font-size: 16px; }
@@ -719,7 +733,10 @@
 
 <footer>
   جميع الحقوق محفوظة © كابتن إيهاب الشريف 2026
-  <div style="margin-top:8px"><a href="#" id="admin-link" class="admin-link">دخول الأدمن</a></div>
+  <div class="footer-actions">
+    <button type="button" id="client-logout" class="logout-btn">تسجيل خروج</button>
+    <a href="#" id="admin-link" class="admin-link">دخول الأدمن</a>
+  </div>
 </footer>
 
 <!-- زر واتساب عائم -->
@@ -890,6 +907,13 @@
       unlock(user);
     });
   })();
+
+  // تسجيل خروج العميل: مسح البيانات المحفوظة على الجهاز ورجوع شاشة الدخول
+  document.getElementById('client-logout').addEventListener('click', function () {
+    try { localStorage.removeItem('captainpop_visitor'); } catch (e) {}
+    window.scrollTo(0, 0);
+    window.location.reload();
+  });
 
   // نسخ رقم فودافون كاش
   document.querySelectorAll('.copy').forEach(function (btn) {
