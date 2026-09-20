@@ -253,7 +253,6 @@
   }
   .plan .btn { width: 100%; }
 
-  /* the featured plan is the one loud element in this section */
   .plan.featured {
     background: linear-gradient(160deg, var(--orange), #c93a00);
     border-color: transparent;
@@ -464,7 +463,6 @@
   @keyframes cue       { 0%, 100% { translate: 0 0; opacity: .55; } 50% { translate: 0 9px; opacity: 1; } }
   @keyframes itemIn    { from { opacity: 0; translate: 0 12px; } to { opacity: 1; translate: 0 0; } }
 
-  /* hero entrance: starts when the gate closes */
   body:not(.locked) .avatar { animation: rise .8s ease both, pulseRing 3s 1.2s ease-out infinite; }
   body:not(.locked) .hero h1 { animation: rise .8s .12s ease both; }
   body:not(.locked) .tagline { animation: rise .8s .22s ease both; }
@@ -486,7 +484,6 @@
   .scroll-cue svg { width: 26px; height: 26px; }
   body:not(.locked) .scroll-cue { animation: cue 1.8s 1.6s ease-in-out infinite; }
 
-  /* scroll reveal (classes added by JS) */
   .reveal:not(.in) { opacity: 0; translate: 0 26px; }
   .reveal.in { animation: revealIn .7s cubic-bezier(.2,.7,.2,1) both; animation-delay: var(--d, 0s); }
 
@@ -568,6 +565,15 @@
     border: 1.5px solid var(--line); background: var(--panel); color: var(--text);
   }
   #admin-app .btn:hover { border-color: #555; transform: none; }
+  #admin-app .btn-home {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #fff;
+  }
+  #admin-app .btn-home:hover {
+    background: var(--ember);
+    border-color: var(--ember);
+  }
   #admin-app .btn[disabled] { opacity: .6; cursor: wait; }
   #admin-app header.bar {
     position: sticky; top: 0; z-index: 10;
@@ -842,6 +848,7 @@
   <header class="bar">
     <div class="wrap bar-in">
       <h2>المسجلين في الموقع</h2>
+      <button class="btn btn-home" id="btn-go-home" type="button">🏠 الصفحة الرئيسية</button>
       <button class="btn" id="refresh" type="button">تحديث</button>
       <button class="btn" id="csv" type="button">تحميل Excel</button>
       <button class="btn" id="logout" type="button">خروج</button>
@@ -1206,6 +1213,14 @@
       apply(data);
       window.scrollTo(0, 0);
     };
+
+    // زر الانتقال للصفحة الرئيسية من داخل لوحة الأدمن
+    $('btn-go-home').addEventListener('click', function () {
+      document.body.classList.remove('admin-mode');
+      $('admin-app').hidden = true;
+      if (window.initReveal) window.initReveal();
+      window.scrollTo(0, 0);
+    });
 
     $('refresh').addEventListener('click', function () {
       var btn = $('refresh'); btn.disabled = true; btn.textContent = 'جاري التحديث…';
