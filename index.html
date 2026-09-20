@@ -618,7 +618,7 @@
 <!-- ========== LOGIN GATE ========== -->
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
   <div class="gate-card">
-    <img class="gate-avatar" src="captain.jpeg" alt="الكابتن إيهاب الشريف">
+    <img class="gate-avatar" src="https://l.top4top.io/p_3915ar3401.jpeg" alt="الكابتن إيهاب الشريف">
     <h1 class="brand" id="gate-title">Captain POP</h1>
     <div class="tabs" role="tablist">
       <button type="button" class="tab active" role="tab" data-tab="client" aria-selected="true">أنا عميل</button>
@@ -661,7 +661,7 @@
 <!-- ========== HERO ========== -->
 <header class="hero">
   <div class="hero-inner">
-    <img class="avatar" src="captain.jpeg" alt="صورة الكابتن إيهاب الشريف">
+    <img class="avatar" src="https://l.top4top.io/p_3915ar3401.jpeg" alt="صورة الكابتن إيهاب الشريف">
     <h1>Captain POP</h1>
     <p class="tagline">Online Personal Trainer and Sports Nutritionist</p>
     <div class="exp">خبرة أكثر من 15 سنة في مجال التدريب</div>
@@ -825,7 +825,7 @@
 </main>
 
 <footer>
-  جميع الحقوق محفوظة © كابتن إيهاب الشريف 2026
+  جميع الحقوق محفوظة ©️ كابتن إيهاب الشريف 2026
   <div class="footer-actions">
     <button type="button" id="client-logout" class="logout-btn">تسجيل خروج</button>
     <a href="#" id="admin-link" class="admin-link">دخول الأدمن</a>
@@ -868,7 +868,6 @@
 
 <script>
   // ===== بوابة الدخول (الاسم + رقم التليفون) =====
-  // لو عايز البيانات توصلك: حط هنا رابط Google Apps Script (Web App) وسيبه فاضي لو مش عايز.
   var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbx6bveksk4NZWq9_BdqYUi_F1MgmQsYsIoCusSiEWxMT2SoHkk3lK68jR9cJnCD9uY/exec";
 
   // ===== حركة الظهور عند النزول في الصفحة + عدّاد الأرقام =====
@@ -947,13 +946,11 @@
     }
 
     function normalizePhone(v) {
-      // أرقام عربية -> إنجليزي، وإزالة المسافات والرموز، وتحويل +20 إلى 0
       v = v.replace(/[٠-٩]/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'.indexOf(d); })
            .replace(/[^\d+]/g, '');
       return v.replace(/^(\+?20)/, '0');
     }
 
-    // ===== التبديل بين عميل / أدمن =====
     var tabs = document.querySelectorAll('.tab');
     var paneClient = document.getElementById('pane-client');
     var paneAdmin = document.getElementById('pane-admin');
@@ -972,7 +969,6 @@
       t.addEventListener('click', function () { showTab(t.getAttribute('data-tab')); });
     });
 
-    // رابط "دخول الأدمن" في الفوتر (للزائر اللي دخل قبل كده)
     var adminLink = document.getElementById('admin-link');
     if (adminLink) {
       adminLink.addEventListener('click', function (e) {
@@ -983,7 +979,6 @@
       });
     }
 
-    // التحقق من كلمة سر الأدمن (JSONP) ثم التحويل للوحة التحكم
     var ADMIN_KEY_STORE = 'captainpop_admin_key';
     function checkAdminKey(key, cb) {
       var cbName = 'chk_' + Date.now();
@@ -1026,7 +1021,6 @@
       });
     });
 
-    // لو دخل قبل كده على نفس الجهاز، افتح الموقع على طول
     try {
       var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
       if (saved && saved.name && saved.phone) { unlock(saved); return; }
@@ -1060,14 +1054,12 @@
     });
   })();
 
-  // تسجيل خروج العميل: مسح البيانات المحفوظة على الجهاز ورجوع شاشة الدخول
   document.getElementById('client-logout').addEventListener('click', function () {
     try { localStorage.removeItem('captainpop_visitor'); } catch (e) {}
     window.scrollTo(0, 0);
     window.location.reload();
   });
 
-  // نسخ رقم فودافون كاش
   document.querySelectorAll('.copy').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var text = btn.getAttribute('data-copy');
@@ -1204,7 +1196,6 @@
       }
     }
 
-    // بتتنادى من شاشة الدخول لما كلمة السر تطلع صح
     window.showAdmin = function (key, data) {
       adminKey = key;
       $('gate').hidden = true;
