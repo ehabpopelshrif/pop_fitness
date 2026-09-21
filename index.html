@@ -253,6 +253,7 @@
   }
   .plan .btn { width: 100%; }
 
+  /* the featured plan is the one loud element in this section */
   .plan.featured {
     background: linear-gradient(160deg, var(--orange), #c93a00);
     border-color: transparent;
@@ -463,6 +464,7 @@
   @keyframes cue       { 0%, 100% { translate: 0 0; opacity: .55; } 50% { translate: 0 9px; opacity: 1; } }
   @keyframes itemIn    { from { opacity: 0; translate: 0 12px; } to { opacity: 1; translate: 0 0; } }
 
+  /* hero entrance: starts when the gate closes */
   body:not(.locked) .avatar { animation: rise .8s ease both, pulseRing 3s 1.2s ease-out infinite; }
   body:not(.locked) .hero h1 { animation: rise .8s .12s ease both; }
   body:not(.locked) .tagline { animation: rise .8s .22s ease both; }
@@ -484,6 +486,7 @@
   .scroll-cue svg { width: 26px; height: 26px; }
   body:not(.locked) .scroll-cue { animation: cue 1.8s 1.6s ease-in-out infinite; }
 
+  /* scroll reveal (classes added by JS) */
   .reveal:not(.in) { opacity: 0; translate: 0 26px; }
   .reveal.in { animation: revealIn .7s cubic-bezier(.2,.7,.2,1) both; animation-delay: var(--d, 0s); }
 
@@ -565,15 +568,6 @@
     border: 1.5px solid var(--line); background: var(--panel); color: var(--text);
   }
   #admin-app .btn:hover { border-color: #555; transform: none; }
-  #admin-app .btn-home {
-    background: var(--orange);
-    border-color: var(--orange);
-    color: #fff;
-  }
-  #admin-app .btn-home:hover {
-    background: var(--ember);
-    border-color: var(--ember);
-  }
   #admin-app .btn[disabled] { opacity: .6; cursor: wait; }
   #admin-app header.bar {
     position: sticky; top: 0; z-index: 10;
@@ -624,7 +618,7 @@
 <!-- ========== LOGIN GATE ========== -->
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
   <div class="gate-card">
-    <img class="gate-avatar" src="https://l.top4top.io/p_3915ar3401.jpeg" alt="الكابتن إيهاب الشريف">
+    <img class="gate-avatar" src="captain.jpeg" alt="الكابتن إيهاب الشريف">
     <h1 class="brand" id="gate-title">Captain POP</h1>
     <div class="tabs" role="tablist">
       <button type="button" class="tab active" role="tab" data-tab="client" aria-selected="true">أنا عميل</button>
@@ -667,7 +661,7 @@
 <!-- ========== HERO ========== -->
 <header class="hero">
   <div class="hero-inner">
-    <img class="avatar" src="https://l.top4top.io/p_3915ar3401.jpeg" alt="صورة الكابتن إيهاب الشريف">
+    <img class="avatar" src="captain.jpeg" alt="صورة الكابتن إيهاب الشريف">
     <h1>Captain POP</h1>
     <p class="tagline">Online Personal Trainer and Sports Nutritionist</p>
     <div class="exp">خبرة أكثر من 15 سنة في مجال التدريب</div>
@@ -677,6 +671,10 @@
       <a class="btn btn-primary" href="#plans">شوف الباقات</a>
       <a class="btn btn-ghost" href="https://ehabpopelshrif.github.io/before_after/" target="_blank" rel="noopener">
         📸 نتائج وتحولات المشتركين
+      </a>
+      <a class="btn btn-ghost" href="https://ehabpopelshrif.github.io/Push-Pull-Legs/" target="_blank" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 6.5v11M17.5 6.5v11M3 9v6M21 9v6M6.5 12h11"/></svg>
+        برنامج تدريب Push / Pull / Legs
       </a>
     </div>
   </div>
@@ -831,7 +829,7 @@
 </main>
 
 <footer>
-  جميع الحقوق محفوظة ©️ كابتن إيهاب الشريف 2026
+  جميع الحقوق محفوظة © كابتن إيهاب الشريف 2026
   <div class="footer-actions">
     <button type="button" id="client-logout" class="logout-btn">تسجيل خروج</button>
     <a href="#" id="admin-link" class="admin-link">دخول الأدمن</a>
@@ -848,7 +846,6 @@
   <header class="bar">
     <div class="wrap bar-in">
       <h2>المسجلين في الموقع</h2>
-      <button class="btn btn-home" id="btn-go-home" type="button">🏠 الصفحة الرئيسية</button>
       <button class="btn" id="refresh" type="button">تحديث</button>
       <button class="btn" id="csv" type="button">تحميل Excel</button>
       <button class="btn" id="logout" type="button">خروج</button>
@@ -875,6 +872,7 @@
 
 <script>
   // ===== بوابة الدخول (الاسم + رقم التليفون) =====
+  // لو عايز البيانات توصلك: حط هنا رابط Google Apps Script (Web App) وسيبه فاضي لو مش عايز.
   var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbx6bveksk4NZWq9_BdqYUi_F1MgmQsYsIoCusSiEWxMT2SoHkk3lK68jR9cJnCD9uY/exec";
 
   // ===== حركة الظهور عند النزول في الصفحة + عدّاد الأرقام =====
@@ -953,11 +951,13 @@
     }
 
     function normalizePhone(v) {
+      // أرقام عربية -> إنجليزي، وإزالة المسافات والرموز، وتحويل +20 إلى 0
       v = v.replace(/[٠-٩]/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'.indexOf(d); })
            .replace(/[^\d+]/g, '');
       return v.replace(/^(\+?20)/, '0');
     }
 
+    // ===== التبديل بين عميل / أدمن =====
     var tabs = document.querySelectorAll('.tab');
     var paneClient = document.getElementById('pane-client');
     var paneAdmin = document.getElementById('pane-admin');
@@ -976,6 +976,7 @@
       t.addEventListener('click', function () { showTab(t.getAttribute('data-tab')); });
     });
 
+    // رابط "دخول الأدمن" في الفوتر (للزائر اللي دخل قبل كده)
     var adminLink = document.getElementById('admin-link');
     if (adminLink) {
       adminLink.addEventListener('click', function (e) {
@@ -986,6 +987,7 @@
       });
     }
 
+    // التحقق من كلمة سر الأدمن (JSONP) ثم التحويل للوحة التحكم
     var ADMIN_KEY_STORE = 'captainpop_admin_key';
     function checkAdminKey(key, cb) {
       var cbName = 'chk_' + Date.now();
@@ -1028,6 +1030,7 @@
       });
     });
 
+    // لو دخل قبل كده على نفس الجهاز، افتح الموقع على طول
     try {
       var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
       if (saved && saved.name && saved.phone) { unlock(saved); return; }
@@ -1061,12 +1064,14 @@
     });
   })();
 
+  // تسجيل خروج العميل: مسح البيانات المحفوظة على الجهاز ورجوع شاشة الدخول
   document.getElementById('client-logout').addEventListener('click', function () {
     try { localStorage.removeItem('captainpop_visitor'); } catch (e) {}
     window.scrollTo(0, 0);
     window.location.reload();
   });
 
+  // نسخ رقم فودافون كاش
   document.querySelectorAll('.copy').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var text = btn.getAttribute('data-copy');
@@ -1203,6 +1208,7 @@
       }
     }
 
+    // بتتنادى من شاشة الدخول لما كلمة السر تطلع صح
     window.showAdmin = function (key, data) {
       adminKey = key;
       $('gate').hidden = true;
@@ -1213,14 +1219,6 @@
       apply(data);
       window.scrollTo(0, 0);
     };
-
-    // زر الانتقال للصفحة الرئيسية من داخل لوحة الأدمن
-    $('btn-go-home').addEventListener('click', function () {
-      document.body.classList.remove('admin-mode');
-      $('admin-app').hidden = true;
-      if (window.initReveal) window.initReveal();
-      window.scrollTo(0, 0);
-    });
 
     $('refresh').addEventListener('click', function () {
       var btn = $('refresh'); btn.disabled = true; btn.textContent = 'جاري التحديث…';
