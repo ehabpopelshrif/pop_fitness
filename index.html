@@ -860,6 +860,7 @@
     <div class="nav-links">
       <a href="#certs">الشهادات</a>
       <a href="#plans">الباقات</a>
+      <a href="#programs">انظمة تدريبية</a>
       <a href="#contact">تواصل</a>
     </div>
     <a class="btn btn-primary nav-cta" href="#plans">اشترك الآن</a>
@@ -870,7 +871,7 @@
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
   <div class="gate-card">
     <div class="gate-avatar-wrap">
-      <img class="gate-avatar" src="captain.jpeg" alt="الكابتن إيهاب الشريف">
+      <img class="gate-avatar" src="https://j.top4top.io/p_3916rtg9s1.jpeg" alt="الكابتن إيهاب الشريف">
       <span class="verified gate-verified" aria-label="مدرب موثّق" title="مدرب موثّق">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>
       </span>
@@ -958,8 +959,8 @@
   <section id="programs">
     <div class="wrap">
       <div class="section-head">
-        <h2>برامج تدريبية</h2>
-        <p>اختار نظام التقسيم اللي يناسبك، وافتحه بكود الاشتراك اللي بيوصلك بعد ما تنضم معايا.</p>
+        <h2>انظمة تدريبية</h2>
+        <p>اختار نظام التدريب اللي يناسبك، وافتحه بكود الاشتراك اللي بيوصلك بعد ما تنضم معايا.</p>
       </div>
 
       <div class="programs-grid">
@@ -1016,7 +1017,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
           </div>
           <h3>برنامج مخصص 100%</h3>
-          <p>مفيش نسخ ولصق — كل خطة تدريب وتغذية بتتبني على جسمك وهدفك وظروفك.</p>
+          <p>  كل خطة تدريب وتغذية بتتبني على جسمك وهدفك وظروفك.</p>
         </div>
         <div class="why-card">
           <div class="ic">
@@ -1030,7 +1031,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
           <h3>تواصل مباشر وسريع</h3>
-          <p>هترد على استفساراتك بنفسي على الواتساب، من غير وسطاء ولا بوتات.</p>
+          <p>هرد على استفساراتك بنفسي على الواتساب، من غير وسطاء ولا بوتات.</p>
         </div>
         <div class="why-card">
           <div class="ic">
@@ -1094,7 +1095,7 @@
         </article>
 
         <article class="plan featured">
-          <span class="flag">الأكثر طلباً 🔥</span>
+
           <h3>باقة الـ 3 شهور</h3>
           <div class="price">1000 <span>جنيه</span></div>
           <ul>
@@ -1109,6 +1110,7 @@
         </article>
 
         <article class="plan">
+          <span class="flag">الأكثر طلباً 🔥</span>
           <h3>باقة VIP</h3>
           <div class="price">1900 <span>جنيه</span></div>
           <ul>
@@ -1373,7 +1375,7 @@
       btn.disabled = true; btn.textContent = 'جاري التحقق…';
       var w = blankTab();
       jsonp({ action: 'verify', code: code }, function (res) {
-        btn.disabled = false; btn.textContent = 'فتح البرنامج';
+        btn.disabled = false; btn.textContent = 'فتح النظام التدريبي';
         if (res && res.ok) {
           try { localStorage.setItem(CODE_KEY, code); } catch (err) {}
           setLocks(true);
