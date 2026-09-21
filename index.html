@@ -1,1253 +1,471 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Captain POP | مدرب شخصي أونلاين وأخصائي تغذية رياضية</title>
-<meta name="description" content="كابتن إيهاب الشريف - مدرب شخصي أونلاين وأخصائي تغذية رياضية بخبرة أكثر من 15 سنة. برامج تدريب ونظام غذائي مخصص لهدفك.">
-<meta name="theme-color" content="#0e0e0e">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-  :root {
-    --ink: #0e0e0e;
-    --panel: #171717;
-    --panel-2: #1f1f1f;
-    --line: #2b2b2b;
-    --orange: #ff4d00;
-    --ember: #ff7a2f;
-    --text: #f5f2ee;
-    --muted: #a8a29a;
-    --radius: 18px;
-    --display: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
-    --body: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
-  }
-
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    margin: 0;
-    background: var(--ink);
-    color: var(--text);
-    font-family: var(--body);
-    font-size: 17px;
-    line-height: 1.75;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  a { color: inherit; text-decoration: none; }
-  a:focus-visible, button:focus-visible {
-    outline: 3px solid var(--ember);
-    outline-offset: 3px;
-  }
-
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
-
-  /* ========== HERO ========== */
-  .hero {
-    position: relative;
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 64px 20px 90px;
-    background:
-      linear-gradient(180deg, rgba(14,14,14,.55) 0%, rgba(14,14,14,.78) 55%, var(--ink) 100%),
-      url("https://imgg.io/images/2026/09/18/25ff0e3b6d7b02f3d25cf56ad5179bdd.jpg") top center / cover no-repeat;
-  }
-
-  .hero-inner { max-width: 760px; }
-
-  .avatar {
-    width: 210px;
-    height: 210px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: 50% 14%;
-    border: 4px solid var(--orange);
-    outline: 8px solid rgba(255,77,0,.16);
-    filter: drop-shadow(0 20px 28px rgba(0,0,0,.55));
-    margin-bottom: 26px;
-  }
-
-  .hero h1 {
-    font-family: var(--display);
-    font-weight: 900;
-    font-size: clamp(3.4rem, 11vw, 6.5rem);
-    line-height: 1;
-    margin: 0 0 14px;
-    letter-spacing: -1px;
-    text-shadow: 0 6px 30px rgba(0,0,0,.8);
-  }
-
-  .tagline {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: clamp(1.05rem, 3.2vw, 1.5rem);
-    color: var(--ember);
-    margin: 0 0 22px;
-    direction: ltr;
-    text-shadow: 0 2px 14px rgba(0,0,0,.9);
-  }
-
-  .exp {
-    display: inline-block;
-    padding: 8px 22px;
-    border: 1px solid rgba(255,255,255,.28);
-    background: rgba(0,0,0,.45);
-    backdrop-filter: blur(6px);
-    border-radius: 999px;
-    font-weight: 500;
-    margin-bottom: 34px;
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    justify-content: center;
-  }
-
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: none; }
-  }
-
-  /* ========== BUTTONS ========== */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 1.05rem;
-    padding: 14px 28px;
-    border-radius: 999px;
-    border: 2px solid transparent;
-    cursor: pointer;
-    transition: transform .2s ease, background .2s ease, border-color .2s ease;
-  }
-  .btn:hover { transform: translateY(-2px); }
-  .btn-primary { background: var(--orange); color: #fff; box-shadow: 0 10px 30px rgba(255,77,0,.35); }
-  .btn-primary:hover { background: var(--ember); }
-  .btn-ghost { border-color: rgba(255,255,255,.5); color: #fff; background: rgba(0,0,0,.35); backdrop-filter: blur(6px); }
-  .btn-ghost:hover { border-color: #fff; }
-
-  /* ========== FACTS STRIP ========== */
-  .facts {
-    margin-top: -46px;
-    position: relative;
-    z-index: 2;
-  }
-  .facts-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-  .fact { padding: 22px 12px; text-align: center; }
-  .fact + .fact { border-inline-start: 1px solid var(--line); }
-  .fact b {
-    display: block;
-    font-family: var(--display);
-    font-weight: 900;
-    font-size: clamp(1.8rem, 5vw, 2.6rem);
-    line-height: 1.2;
-    color: var(--orange);
-  }
-  .fact span { color: var(--muted); font-size: .95rem; }
-
-  /* ========== SECTIONS ========== */
-  section { padding: 84px 0 0; }
-  .section-head { margin-bottom: 36px; }
-  .section-head h2 {
-    font-family: var(--display);
-    font-weight: 900;
-    font-size: clamp(1.9rem, 5vw, 2.8rem);
-    line-height: 1.3;
-    margin: 0 0 8px;
-  }
-  .section-head p { margin: 0; color: var(--muted); max-width: 52ch; }
-
-  /* ========== CERTIFICATES ========== */
-  .certs {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 14px;
-  }
-  .cert {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 20px 22px;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-inline-start: 4px solid var(--orange);
-    border-radius: 14px;
-    font-weight: 600;
-    line-height: 1.5;
-  }
-  .cert svg { flex: none; width: 30px; height: 30px; color: var(--orange); }
-  .cert small { display: block; color: var(--muted); font-weight: 400; direction: ltr; text-align: right; }
-
-  /* ========== PRICING ========== */
-  .plans {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    gap: 20px;
-    align-items: stretch;
-  }
-  .plan {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    padding: 32px 26px 28px;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 22px;
-  }
-  .plan h3 {
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 1.4rem;
-    margin: 0;
-  }
-  .price {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    margin: 14px 0 22px;
-    font-family: var(--display);
-    font-weight: 900;
-    font-size: 3.2rem;
-    line-height: 1;
-  }
-  .price span { font-size: 1.05rem; font-weight: 600; color: var(--muted); }
-
-  .plan ul { list-style: none; padding: 0; margin: 0 0 28px; flex: 1; }
-  .plan li {
-    position: relative;
-    padding-inline-start: 30px;
-    margin-bottom: 12px;
-    color: #d9d5cf;
-    line-height: 1.6;
-  }
-  .plan li::before {
-    content: "";
-    position: absolute;
-    inset-inline-start: 0;
-    top: 5px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--orange)
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E") center / 12px no-repeat;
-  }
-  .plan .btn { width: 100%; }
-
-  .plan.featured {
-    background: linear-gradient(160deg, var(--orange), #c93a00);
-    border-color: transparent;
-    box-shadow: 0 24px 60px rgba(255,77,0,.28);
-    transform: translateY(-10px);
-  }
-  .plan.featured .price span,
-  .plan.featured li { color: #fff; }
-  .plan.featured li::before { background-color: #fff; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff4d00' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E"); }
-  .plan.featured .btn { background: #fff; color: var(--orange); box-shadow: none; }
-  .plan.featured .btn:hover { background: #ffe9de; }
-  .flag {
-    position: absolute;
-    top: -14px;
-    inset-inline-start: 24px;
-    background: #fff;
-    color: var(--orange);
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: .9rem;
-    padding: 3px 16px;
-    border-radius: 999px;
-    box-shadow: 0 6px 18px rgba(0,0,0,.35);
-  }
-
-  /* ========== CONTACT & PAYMENT ========== */
-  .contact-list {
-    display: grid;
-    gap: 12px;
-    max-width: 640px;
-  }
-  .row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 20px;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    transition: border-color .2s ease, background .2s ease;
-  }
-  .row:hover { background: var(--panel-2); border-color: #444; }
-  .dot {
-    flex: none;
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
-    display: grid;
-    place-items: center;
-    color: #fff;
-  }
-  .dot svg { width: 24px; height: 24px; }
-  .row .label { flex: 1; font-weight: 600; line-height: 1.4; }
-  .row .label small { display: block; color: var(--muted); font-weight: 400; font-size: .88rem; }
-  .row .go { color: var(--muted); font-size: 1.3rem; }
-
-  .vodafone  { background: #e60000; }
-  .instapay  { background: #5b2a86; }
-  .whatsapp  { background: #1ea952; }
-  .instagram { background: linear-gradient(45deg, #f9a03f, #e1306c 55%, #833ab4); }
-
-  .copy {
-    flex: none;
-    font-family: var(--body);
-    font-weight: 600;
-    font-size: .9rem;
-    color: var(--text);
-    background: transparent;
-    border: 1px solid #454545;
-    border-radius: 999px;
-    padding: 6px 16px;
-    cursor: pointer;
-  }
-  .copy:hover { border-color: var(--ember); color: var(--ember); }
-
-  /* ========== FOOTER ========== */
-  footer {
-    margin-top: 96px;
-    padding: 28px 20px 96px;
-    border-top: 1px solid var(--line);
-    text-align: center;
-    color: var(--muted);
-    font-size: .95rem;
-  }
-
-  /* floating WhatsApp */
-  .float-wa {
-    position: fixed;
-    inset-inline-start: 18px;
-    bottom: 18px;
-    z-index: 20;
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    background: #1ea952;
-    display: grid;
-    place-items: center;
-    color: #fff;
-    box-shadow: 0 10px 28px rgba(0,0,0,.5);
-  }
-  .float-wa svg { width: 30px; height: 30px; }
-
-  /* ========== LOGIN GATE ========== */
-  body.locked { overflow: hidden; }
-  .gate {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: grid;
-    place-items: center;
-    padding: 20px;
-    background:
-      radial-gradient(ellipse at 50% 0%, rgba(255,77,0,.22), transparent 60%),
-      var(--ink);
-    overflow-y: auto;
-  }
-  .gate[hidden] { display: none; }
-  .gate-card {
-    width: 100%;
-    max-width: 420px;
-    padding: 34px 28px 30px;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    text-align: center;
-    box-shadow: 0 30px 80px rgba(0,0,0,.6);
-  }
-  .gate-card .brand {
-    font-family: var(--display);
-    font-weight: 900;
-    font-size: 2.4rem;
-    line-height: 1.1;
-    margin: 0 0 6px;
-  }
-  .gate-card .sub { color: var(--muted); margin: 0 0 26px; font-size: .98rem; }
-  .field { text-align: right; margin-bottom: 16px; }
-  .field label { display: block; font-weight: 600; font-size: .95rem; margin-bottom: 6px; }
-  .field input {
-    width: 100%;
-    padding: 14px 16px;
-    font: inherit;
-    color: var(--text);
-    background: var(--ink);
-    border: 1.5px solid var(--line);
-    border-radius: 12px;
-  }
-  .field input:focus { outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,77,0,.25); }
-  .field input.bad { border-color: #ff5b5b; }
-  .field .err { display: none; color: #ff7b7b; font-size: .88rem; margin-top: 6px; }
-  .field input.bad + .err { display: block; }
-  .gate-card .btn { width: 100%; margin-top: 8px; }
-  .gate-card .note { color: var(--muted); font-size: .82rem; margin: 16px 0 0; }
-  .welcome { color: var(--muted); margin: -14px 0 30px; font-size: 1.05rem; }
-  .welcome b { color: var(--text); }
-
-  .tabs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    padding: 4px;
-    margin: 0 0 22px;
-    background: var(--ink);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-  }
-  .tab {
-    padding: 10px 0;
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 1rem;
-    color: var(--muted);
-    background: transparent;
-    border: 0;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: background .2s ease, color .2s ease;
-  }
-  .tab.active { background: var(--orange); color: #fff; }
-  .gate-msg { min-height: 1.4em; margin: 14px 0 0; font-size: .92rem; color: #ff7b7b; }
-  .admin-link { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
-  .admin-link:hover { color: var(--ember); }
-  .footer-actions { margin-top: 14px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-  .logout-btn {
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 1rem;
-    color: var(--text);
-    background: transparent;
-    border: 1.5px solid #454545;
-    border-radius: 999px;
-    padding: 10px 28px;
-    cursor: pointer;
-    transition: border-color .2s ease, color .2s ease;
-  }
-  .logout-btn:hover { border-color: var(--ember); color: var(--ember); }
-
-  /* ========== MOTION ========== */
-  @keyframes rise      { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-  @keyframes revealIn  { from { opacity: 0; translate: 0 26px; } to { opacity: 1; translate: 0 0; } }
-  @keyframes cardIn    { from { opacity: 0; transform: translateY(26px) scale(.95); } to { opacity: 1; transform: none; } }
-  @keyframes gateOut   { to { opacity: 0; transform: scale(1.04); } }
-  @keyframes paneIn    { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
-  @keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(255,77,0,.55); } 70%, 100% { box-shadow: 0 0 0 22px rgba(255,77,0,0); } }
-  @keyframes glow      { 0%, 100% { box-shadow: 0 10px 30px rgba(255,77,0,.35); } 50% { box-shadow: 0 10px 46px rgba(255,77,0,.8); } }
-  @keyframes drift     { from { translate: -40px 0; } to { translate: 50px 36px; } }
-  @keyframes bob       { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
-  @keyframes ping      { 0% { transform: scale(1); opacity: .7; } 80%, 100% { transform: scale(1.7); opacity: 0; } }
-  @keyframes cue       { 0%, 100% { translate: 0 0; opacity: .55; } 50% { translate: 0 9px; opacity: 1; } }
-  @keyframes itemIn    { from { opacity: 0; translate: 0 12px; } to { opacity: 1; translate: 0 0; } }
-
-  body:not(.locked) .avatar { animation: rise .8s ease both, pulseRing 3s 1.2s ease-out infinite; }
-  body:not(.locked) .hero h1 { animation: rise .8s .12s ease both; }
-  body:not(.locked) .tagline { animation: rise .8s .22s ease both; }
-  body:not(.locked) .exp { animation: rise .8s .32s ease both; }
-  body:not(.locked) .welcome { animation: rise .8s .4s ease both; }
-  body:not(.locked) .hero-actions { animation: rise .8s .48s ease both; }
-  body:not(.locked) .hero-actions .btn-primary { animation: glow 2.6s 1.4s ease-in-out infinite; }
-
-  .scroll-cue {
-    position: absolute;
-    bottom: 62px;
-    left: 0; right: 0;
-    margin: 0 auto;
-    width: 34px; height: 34px;
-    display: grid; place-items: center;
-    color: #fff;
-    opacity: 0;
-  }
-  .scroll-cue svg { width: 26px; height: 26px; }
-  body:not(.locked) .scroll-cue { animation: cue 1.8s 1.6s ease-in-out infinite; }
-
-  .reveal:not(.in) { opacity: 0; translate: 0 26px; }
-  .reveal.in { animation: revealIn .7s cubic-bezier(.2,.7,.2,1) both; animation-delay: var(--d, 0s); }
-
-  .flag { animation: bob 2.4s ease-in-out infinite; }
-  .float-wa::after {
-    content: "";
-    position: absolute; inset: 0;
-    border-radius: 50%;
-    border: 2px solid #1ea952;
-    animation: ping 2.4s ease-out infinite;
-    pointer-events: none;
-  }
-
-  .plan { transition: transform .3s ease, border-color .3s ease; }
-  .cert { transition: transform .25s ease, border-color .25s ease, background .25s ease; }
-  @media (hover: hover) {
-    .plan:hover { transform: translateY(-6px); border-color: #444; }
-    .plan.featured:hover { transform: translateY(-16px); border-color: transparent; }
-    .cert:hover { transform: translateY(-3px); background: var(--panel-2); }
-  }
-
-  /* gate */
-  .gate { overflow-x: hidden; }
-  .gate::before {
-    content: "";
-    position: absolute;
-    top: -200px; left: 50%;
-    width: 520px; height: 520px;
-    margin-left: -260px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,77,0,.3), transparent 65%);
-    filter: blur(8px);
-    pointer-events: none;
-    animation: drift 9s ease-in-out infinite alternate;
-  }
-  .gate:not([hidden]) .gate-card { position: relative; animation: cardIn .7s cubic-bezier(.2,.7,.2,1) both; }
-  .gate.closing { animation: gateOut .42s ease forwards; pointer-events: none; }
-  #pane-client:not([hidden]), #pane-admin:not([hidden]) { animation: paneIn .35s ease both; }
-  .gate-avatar {
-    display: block;
-    width: 108px; height: 108px;
-    margin: 0 auto 16px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: 50% 14%;
-    border: 3px solid var(--orange);
-    outline: 5px solid rgba(255,77,0,.16);
-    animation: pulseRing 3s ease-out infinite;
-  }
-  .gate-card .brand { margin-bottom: 18px; }
-
-  /* admin list */
-  #admin-app .item { animation: itemIn .45s ease both; animation-delay: calc(var(--i, 0) * 45ms); }
-  #admin-app .stat { animation: itemIn .5s ease both; }
-
-  @media (max-width: 640px) {
-    body { font-size: 16px; }
-    section { padding-top: 64px; }
-    .avatar { width: 170px; height: 170px; }
-    .plan.featured { transform: none; }
-    .row { flex-wrap: wrap; }
-    .copy { margin-inline-start: auto; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-  }
-
-  /* ========== ADMIN DASHBOARD (inside the same page) ========== */
-  body.admin-mode > .hero,
-  body.admin-mode > main,
-  body.admin-mode > footer,
-  body.admin-mode > .float-wa { display: none; }
-
-  #admin-app [hidden] { display: none !important; }
-  #admin-app { min-height: 100svh; background: var(--ink); }
-  #admin-app .btn {
-    font-size: .95rem; padding: 10px 20px;
-    border: 1.5px solid var(--line); background: var(--panel); color: var(--text);
-  }
-  #admin-app .btn:hover { border-color: #555; transform: none; }
-  #admin-app .btn-home {
-    background: var(--orange);
-    border-color: var(--orange);
-    color: #fff;
-  }
-  #admin-app .btn-home:hover {
-    background: var(--ember);
-    border-color: var(--ember);
-  }
-  #admin-app .btn[disabled] { opacity: .6; cursor: wait; }
-  #admin-app header.bar {
-    position: sticky; top: 0; z-index: 10;
-    background: rgba(14,14,14,.92); backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-  }
-  #admin-app .bar-in { display: flex; align-items: center; gap: 10px; padding: 12px 0; flex-wrap: wrap; }
-  #admin-app .bar-in h2 { font-family: var(--display); font-weight: 900; font-size: 1.35rem; margin: 0; margin-inline-end: auto; }
-  #admin-app .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 22px 0 18px; }
-  #admin-app .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 16px 14px; text-align: center; }
-  #admin-app .stat b { display: block; font-family: var(--display); font-weight: 900; font-size: 2rem; line-height: 1.2; color: var(--orange); }
-  #admin-app .stat span { color: var(--muted); font-size: .9rem; }
-  #admin-app .meta { color: var(--muted); font-size: .85rem; margin: -6px 0 14px; }
-  #admin-app .tools { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
-  #admin-app .tools input {
-    flex: 1; min-width: 200px; padding: 11px 16px; font: inherit; color: var(--text);
-    background: var(--panel); border: 1.5px solid var(--line); border-radius: 999px;
-  }
-  #admin-app .tools input:focus { outline: none; border-color: var(--orange); }
-  #admin-app .msg { min-height: 1.4em; margin: 0 0 12px; font-size: .92rem; color: #ff7b7b; }
-  #admin-app .list { display: grid; gap: 10px; padding-bottom: 60px; }
-  #admin-app .item {
-    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-    padding: 14px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
-  }
-  #admin-app .who { flex: 1; min-width: 180px; }
-  #admin-app .who strong { display: block; font-weight: 600; font-size: 1.05rem; }
-  #admin-app .who small { color: var(--muted); }
-  #admin-app .phone { direction: ltr; font-family: var(--display); font-weight: 600; letter-spacing: .5px; }
-  #admin-app .acts { display: flex; gap: 8px; }
-  #admin-app .chip {
-    padding: 6px 14px; border-radius: 999px; border: 1px solid #454545; background: transparent;
-    color: var(--text); font: inherit; font-size: .88rem; font-weight: 600; cursor: pointer;
-  }
-  #admin-app .chip:hover { border-color: var(--ember); color: var(--ember); }
-  #admin-app .chip.wa { background: #1ea952; border-color: #1ea952; color: #fff; }
-  #admin-app .chip.wa:hover { background: #22c15d; border-color: #22c15d; color: #fff; }
-  #admin-app .empty { text-align: center; color: var(--muted); padding: 50px 0; }
-  @media (max-width: 560px) {
-    #admin-app .stat b { font-size: 1.6rem; }
-    #admin-app .acts { width: 100%; }
-    #admin-app .acts .chip { flex: 1; text-align: center; }
-  }
-</style>
-</head>
-<body class="locked">
-
-<!-- ========== LOGIN GATE ========== -->
-<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
-  <div class="gate-card">
-    <img class="gate-avatar" src="https://l.top4top.io/p_3915ar3401.jpeg" alt="الكابتن إيهاب الشريف">
-    <h1 class="brand" id="gate-title">Captain POP</h1>
-    <div class="tabs" role="tablist">
-      <button type="button" class="tab active" role="tab" data-tab="client" aria-selected="true">أنا عميل</button>
-      <button type="button" class="tab" role="tab" data-tab="admin" aria-selected="false">أدمن</button>
-    </div>
-
-    <div id="pane-client">
-    <p class="sub">سجّل اسمك ورقمك عشان تدخل الموقع</p>
-
-    <form id="gate-form" novalidate>
-      <div class="field">
-        <label for="g-name">الاسم</label>
-        <input id="g-name" type="text" autocomplete="name" placeholder="اكتب اسمك">
-        <div class="err">اكتب اسمك من فضلك</div>
-      </div>
-      <div class="field">
-        <label for="g-phone">رقم التليفون</label>
-        <input id="g-phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="01XXXXXXXXX" style="text-align:right">
-        <div class="err">اكتب رقم موبايل مصري صحيح (11 رقم)</div>
-      </div>
-      <button class="btn btn-primary" type="submit">دخول الموقع</button>
-    </form>
-    <p class="note">بياناتك بتستخدم بس للتواصل معاك بخصوص الاشتراك.</p>
-    </div>
-
-    <div id="pane-admin" hidden>
-      <p class="sub">اكتب كلمة السر عشان تشوف المسجلين</p>
-      <form id="admin-form" novalidate>
-        <div class="field">
-          <label for="a-key">كلمة السر</label>
-          <input id="a-key" type="password" autocomplete="current-password" dir="ltr" placeholder="••••••••" style="text-align:right">
-        </div>
-        <button class="btn btn-primary" type="submit" id="admin-btn">دخول لوحة التحكم</button>
-      </form>
-      <p class="gate-msg" id="a-msg" role="alert"></p>
-    </div>
-  </div>
-</div>
-
-<!-- ========== HERO ========== -->
-<header class="hero">
-  <div class="hero-inner">
-    <img class="avatar" src="https://l.top4top.io/p_3915ar3401.jpeg" alt="صورة الكابتن إيهاب الشريف">
-    <h1>Captain POP</h1>
-    <p class="tagline">Online Personal Trainer and Sports Nutritionist</p>
-    <div class="exp">خبرة أكثر من 15 سنة في مجال التدريب</div>
-    <p class="welcome" id="welcome" hidden>أهلاً يا <b id="welcome-name"></b> 👋</p>
-
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#plans">شوف الباقات</a>
-      <a class="btn btn-ghost" href="https://ehabpopelshrif.github.io/before_after/" target="_blank" rel="noopener">
-        📸 نتائج وتحولات المشتركين
-      </a>
-    </div>
-  </div>
-
-  <a class="scroll-cue" href="#certs" aria-label="انزل لتحت">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-  </a>
-</header>
-
-<main>
-
-  <!-- ========== FACTS ========== -->
-  <div class="facts">
-    <div class="wrap">
-      <div class="facts-grid">
-        <div class="fact"><b>+15</b><span>سنة خبرة</span></div>
-        <div class="fact"><b>4</b><span>شهادات معتمدة</span></div>
-        <div class="fact"><b>100%</b><span>أونلاين</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========== CERTIFICATES ========== -->
-  <section id="certs">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>الشهادات والاعتمادات</h2>
-      </div>
-
-      <div class="certs">
-        <div class="cert">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/></svg>
-          <div>شهادة التدريب الشخصي<small>Certified Personal Trainer</small></div>
-        </div>
-        <div class="cert">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/></svg>
-          <div>شهادة التغذية الرياضية<small>Sports Nutritionist</small></div>
-        </div>
-        <div class="cert">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/></svg>
-          <div>شهادة الإسعافات الأولية</div>
-        </div>
-        <div class="cert">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/></svg>
-          <div>شهادة تصميم البرامج التدريبية<small>Programs Designing Training</small></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PLANS ========== -->
-  <section id="plans">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>باقات التدريب الأونلاين</h2>
-        <p>اختار الباقة اللي تناسب هدفك، واضغط اشترك وهتكمل معايا على واتساب.</p>
-      </div>
-
-      <div class="plans">
-
-        <article class="plan">
-          <h3>باقة الشهر</h3>
-          <div class="price">500 <span>جنيه</span></div>
-          <ul>
-            <li>برنامج تدريبي مخصص لهدفك</li>
-            <li>نظام غذائي حسب سعراتك</li>
-            <li>متابعة أسبوعية وتعديل الخطة</li>
-            <li>رد على الاستفسارات عبر الواتساب</li>
-          </ul>
-          <a class="btn btn-primary" href="https://wa.me/201555557031?text=أريد%20الاشتراك%20في%20باقة%20الشهر">اشترك الآن</a>
-        </article>
-
-        <article class="plan featured">
-          <span class="flag">الأكثر طلباً 🔥</span>
-          <h3>باقة الـ 3 شهور</h3>
-          <div class="price">1000 <span>جنيه</span></div>
-          <ul>
-            <li>تغيير جذري لشكل الجسم</li>
-            <li>جدول مكملات غذائية مخصص</li>
-            <li>متابعة أسبوعية عبر الواتساب</li>
-            <li>متابعة وتحليل التطور أسبوعياً</li>
-          </ul>
-          <a class="btn" href="https://wa.me/201555557031?text=أريد%20الاشتراك%20في%20باقة%20الـ%203%20شهور">اشترك الآن</a>
-        </article>
-
-        <article class="plan">
-          <h3>باقة VIP</h3>
-          <div class="price">2000 <span>جنيه</span></div>
-          <ul>
-            <li>اشتراك 3 شهور</li>
-            <li>مكالمة فيديو كل أسبوع</li>
-            <li>تحول كامل للمستوى الاحترافي</li>
-            <li>متابعة يومية ومستمرة عبر الواتساب أو كول</li>
-            <li>مرونة كاملة في تعديل الأنظمة</li>
-          </ul>
-          <a class="btn btn-primary" href="https://wa.me/201555557031?text=أريد%20الاشتراك%20في%20باقة%20الـ%20VIP%20">اشترك الآن</a>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PAYMENT & CONTACT ========== -->
-  <section id="contact">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>طرق الدفع والتواصل</h2>
-        <p>اضغط على الوسيلة للتحويل أو التواصل فوراً.</p>
-      </div>
-
-      <div class="contact-list">
-
-        <div class="row">
-          <a class="dot vodafone" href="tel:*9*7*01555557031%23" aria-label="تحويل فودافون كاش">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
-          </a>
-          <a class="label" href="tel:*9*7*01555557031%23">
-            تحويل فودافون كاش
-            <small dir="ltr" style="text-align:right">01555557031</small>
-          </a>
-          <button class="copy" type="button" data-copy="01555557031">نسخ الرقم</button>
-        </div>
-
-        <a class="row" href="https://ipn.eg/S/ehab_el_shrif/instapay/7itHY8" target="_blank" rel="noopener">
-          <span class="dot instapay">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg>
-          </span>
-          <span class="label">ادفع عبر إنستا باي<small>InstaPay</small></span>
-          <span class="go">‹</span>
-        </a>
-
-        <a class="row" href="https://wa.me/201555557031" target="_blank" rel="noopener">
-          <span class="dot whatsapp">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11 11 0 0 0 3.2 17.3L2 22l4.8-1.2A11 11 0 1 0 20.5 3.5zM12 20a8.9 8.9 0 0 1-4.5-1.2l-.3-.2-2.8.7.8-2.7-.2-.3A8.9 8.9 0 1 1 12 20zm4.9-6.6c-.3-.1-1.6-.8-1.8-.9s-.4-.1-.6.1-.7.9-.8 1-.3.2-.6.1a7.3 7.3 0 0 1-3.6-3.1c-.3-.5.3-.5.8-1.5a.5.5 0 0 0 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg>
-          </span>
-          <span class="label">تواصل معنا عبر واتساب<small>WhatsApp</small></span>
-          <span class="go">‹</span>
-        </a>
-
-        <a class="row" href="https://www.instagram.com/coach_p0p?stkn=MTBlN2c3ejY4eXVrNg%3D%3D&utm_source=qr" target="_blank" rel="noopener">
-          <span class="dot instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-          </span>
-          <span class="label">تابعنا على إنستجرام<small>Instagram</small></span>
-          <span class="go">‹</span>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  جميع الحقوق محفوظة ©️ كابتن إيهاب الشريف 2026
-  <div class="footer-actions">
-    <button type="button" id="client-logout" class="logout-btn">تسجيل خروج</button>
-    <a href="#" id="admin-link" class="admin-link">دخول الأدمن</a>
-  </div>
-</footer>
-
-<!-- زر واتساب عائم -->
-<a class="float-wa" href="https://wa.me/201555557031" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11 11 0 0 0 3.2 17.3L2 22l4.8-1.2A11 11 0 1 0 20.5 3.5zM12 20a8.9 8.9 0 0 1-4.5-1.2l-.3-.2-2.8.7.8-2.7-.2-.3A8.9 8.9 0 1 1 12 20zm4.9-6.6c-.3-.1-1.6-.8-1.8-.9s-.4-.1-.6.1-.7.9-.8 1-.3.2-.6.1a7.3 7.3 0 0 1-3.6-3.1c-.3-.5.3-.5.8-1.5a.5.5 0 0 0 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg>
-</a>
-
-<!-- ========== ADMIN DASHBOARD ========== -->
-<div id="admin-app" hidden>
-  <header class="bar">
-    <div class="wrap bar-in">
-      <h2>المسجلين في الموقع</h2>
-      <button class="btn btn-home" id="btn-go-home" type="button">🏠 الصفحة الرئيسية</button>
-      <button class="btn" id="refresh" type="button">تحديث</button>
-      <button class="btn" id="csv" type="button">تحميل Excel</button>
-      <button class="btn" id="logout" type="button">خروج</button>
-    </div>
-  </header>
-
-  <div class="wrap">
-    <div class="stats">
-      <div class="stat"><b id="s-total">0</b><span>إجمالي المسجلين</span></div>
-      <div class="stat"><b id="s-today">0</b><span>النهاردة</span></div>
-      <div class="stat"><b id="s-week">0</b><span>آخر 7 أيام</span></div>
-    </div>
-
-    <div class="meta" id="meta"></div>
-
-    <div class="tools">
-      <input id="search" type="search" placeholder="ابحث بالاسم أو الرقم">
-    </div>
-
-    <div class="msg" id="app-msg" role="alert"></div>
-    <div class="list" id="list"></div>
-  </div>
-</div>
-
-<script>
-  // ===== بوابة الدخول (الاسم + رقم التليفون) =====
-  var LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbx6bveksk4NZWq9_BdqYUi_F1MgmQsYsIoCusSiEWxMT2SoHkk3lK68jR9cJnCD9uY/exec";
-
-  // ===== حركة الظهور عند النزول في الصفحة + عدّاد الأرقام =====
-  window.initReveal = function () {
-    if (window.__revealDone) return;
-    window.__revealDone = true;
-
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var targets = [];
-
-    function mark(sel, step) {
-      document.querySelectorAll(sel).forEach(function (el, i) {
-        el.classList.add('reveal');
-        el.style.setProperty('--d', (i * step) + 's');
-        targets.push(el);
-      });
-    }
-    mark('.section-head', 0);
-    mark('.facts-grid .fact', 0.1);
-    mark('.cert', 0.08);
-    mark('.plan', 0.12);
-    mark('.contact-list .row', 0.08);
-
-    function countUp(b) {
-      var m = b.textContent.trim().match(/^(\D*)(\d+)(\D*)$/);
-      if (!m || reduce) return;
-      var to = parseInt(m[2], 10), t0 = null;
-      b.textContent = m[1] + '0' + m[3];
-      function step(t) {
-        if (!t0) t0 = t;
-        var p = Math.min((t - t0) / 1200, 1);
-        b.textContent = m[1] + Math.round(to * (1 - Math.pow(1 - p, 3))) + m[3];
-        if (p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-
-    if (reduce || !('IntersectionObserver' in window)) {
-      targets.forEach(function (el) { el.classList.add('in'); });
-      return;
-    }
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var el = e.target;
-        el.classList.add('in');
-        io.unobserve(el);
-        if (el.classList.contains('fact')) countUp(el.querySelector('b'));
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-    targets.forEach(function (el) { io.observe(el); });
-  };
-
-  (function () {
-    var gate = document.getElementById('gate');
-    var form = document.getElementById('gate-form');
-    var nameEl = document.getElementById('g-name');
-    var phoneEl = document.getElementById('g-phone');
-    var KEY = 'captainpop_visitor';
-
-    function unlock(user, animate) {
-      document.body.classList.remove('locked');
-      if (animate) {
-        gate.classList.add('closing');
-        setTimeout(function () { gate.hidden = true; gate.classList.remove('closing'); }, 420);
-      } else {
-        gate.hidden = true;
-      }
-      if (window.initReveal) window.initReveal();
-      if (user && user.name) {
-        document.getElementById('welcome-name').textContent = user.name;
-        document.getElementById('welcome').hidden = false;
-      }
-    }
-
-    function normalizePhone(v) {
-      v = v.replace(/[٠-٩]/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'.indexOf(d); })
-           .replace(/[^\d+]/g, '');
-      return v.replace(/^(\+?20)/, '0');
-    }
-
-    var tabs = document.querySelectorAll('.tab');
-    var paneClient = document.getElementById('pane-client');
-    var paneAdmin = document.getElementById('pane-admin');
-
-    function showTab(which) {
-      tabs.forEach(function (t) {
-        var on = t.getAttribute('data-tab') === which;
-        t.classList.toggle('active', on);
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-      });
-      paneClient.hidden = which !== 'client';
-      paneAdmin.hidden = which !== 'admin';
-      (which === 'client' ? nameEl : document.getElementById('a-key')).focus();
-    }
-    tabs.forEach(function (t) {
-      t.addEventListener('click', function () { showTab(t.getAttribute('data-tab')); });
-    });
-
-    var adminLink = document.getElementById('admin-link');
-    if (adminLink) {
-      adminLink.addEventListener('click', function (e) {
-        e.preventDefault();
-        gate.hidden = false;
-        document.body.classList.add('locked');
-        showTab('admin');
-      });
-    }
-
-    var ADMIN_KEY_STORE = 'captainpop_admin_key';
-    function checkAdminKey(key, cb) {
-      var cbName = 'chk_' + Date.now();
-      var s = document.createElement('script');
-      var finished = false;
-      function end(res) {
-        if (finished) return;
-        finished = true;
-        clearTimeout(timer);
-        try { delete window[cbName]; } catch (e) { window[cbName] = undefined; }
-        if (s.parentNode) s.parentNode.removeChild(s);
-        cb(res);
-      }
-      var timer = setTimeout(function () { end({ ok: false, error: 'timeout' }); }, 15000);
-      window[cbName] = end;
-      s.onerror = function () { end({ ok: false, error: 'network' }); };
-      s.src = LEAD_ENDPOINT + '?action=list&key=' + encodeURIComponent(key) +
-              '&callback=' + cbName + '&t=' + Date.now();
-      document.head.appendChild(s);
-    }
-
-    document.getElementById('admin-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var key = document.getElementById('a-key').value;
-      var msg = document.getElementById('a-msg');
-      var btn = document.getElementById('admin-btn');
-      if (!key) { msg.textContent = 'اكتب كلمة السر'; return; }
-      msg.textContent = '';
-      btn.disabled = true; btn.textContent = 'جاري التحقق…';
-      checkAdminKey(key, function (res) {
-        btn.disabled = false; btn.textContent = 'دخول لوحة التحكم';
-        if (res && res.ok) {
-          document.getElementById('a-key').value = '';
-          window.showAdmin(key, res);
-        } else if (res && res.error === 'bad_key') {
-          msg.textContent = 'كلمة السر غلط';
-        } else {
-          msg.textContent = 'مقدرتش أتحقق دلوقتي. اتأكد من الإنترنت وإن كود Apps Script اتحدّث.';
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول التمارين - Push / Pull / Legs</title>
+    <!-- استدعاء خط cairo من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(22, 27, 38, 0.85);
+            --primary-orange: #ff5500;
+            --text-main: #ffffff;
+            --text-muted: #a0aec0;
+            --border-color: rgba(255, 85, 0, 0.2);
+            --table-header-bg: rgba(255, 85, 0, 0.15);
         }
-      });
-    });
 
-    try {
-      var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
-      if (saved && saved.name && saved.phone) { unlock(saved); return; }
-    } catch (e) {}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
 
-    nameEl.focus();
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(255, 85, 0, 0.15), transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.8), transparent 50%);
+            color: var(--text-main);
+            padding: 20px 10px;
+            min-height: 100vh;
+        }
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var name = nameEl.value.trim();
-      var phone = normalizePhone(phoneEl.value);
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
 
-      var nameOk = name.length >= 2;
-      var phoneOk = /^01[0125]\d{8}$/.test(phone);
-      nameEl.classList.toggle('bad', !nameOk);
-      phoneEl.classList.toggle('bad', !phoneOk);
-      if (!nameOk || !phoneOk) { (nameOk ? phoneEl : nameEl).focus(); return; }
+        /* كارت التمرين */
+        .workout-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
 
-      var user = { name: name, phone: phone, time: new Date().toISOString() };
-      try { localStorage.setItem(KEY, JSON.stringify(user)); } catch (err) {}
+        .card-header {
+            border-bottom: 2px solid var(--primary-orange);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-      if (LEAD_ENDPOINT) {
-        try {
-          var qs = '?name=' + encodeURIComponent(user.name) +
-                   '&phone=' + encodeURIComponent(user.phone) +
-                   '&t=' + Date.now();
-          fetch(LEAD_ENDPOINT + qs, { method: 'GET', mode: 'no-cors', keepalive: true });
-        } catch (err) {}
-      }
-      unlock(user, true);
-    });
-  })();
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary-orange);
+            letter-spacing: 0.5px;
+        }
 
-  document.getElementById('client-logout').addEventListener('click', function () {
-    try { localStorage.removeItem('captainpop_visitor'); } catch (e) {}
-    window.scrollTo(0, 0);
-    window.location.reload();
-  });
+        .card-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
 
-  document.querySelectorAll('.copy').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var text = btn.getAttribute('data-copy');
-      var done = function () {
-        var old = btn.textContent;
-        btn.textContent = 'تم النسخ ✓';
-        setTimeout(function () { btn.textContent = old; }, 1600);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(done);
-      } else {
-        var t = document.createElement('textarea');
-        t.value = text; document.body.appendChild(t); t.select();
-        document.execCommand('copy'); document.body.removeChild(t); done();
-      }
-    });
-  });
-</script>
+        /* جدول التمارين */
+        .table-responsive {
+            overflow-x: auto;
+        }
 
-<script>
-  // ===== لوحة الأدمن (داخل نفس الصفحة) =====
-  (function () {
-    var $ = function (id) { return document.getElementById(id); };
-    var rows = [];
-    var adminKey = '';
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+        }
 
-    function load(key, cb) {
-      var name = 'cb_' + Date.now();
-      var script = document.createElement('script');
-      var done = false;
-      var timer = setTimeout(function () { finish({ ok: false, error: 'timeout' }); }, 15000);
+        th, td {
+            padding: 12px 14px;
+            font-size: 0.95rem;
+        }
 
-      function finish(data) {
-        if (done) return;
-        done = true;
-        clearTimeout(timer);
-        try { delete window[name]; } catch (e) { window[name] = undefined; }
-        if (script.parentNode) script.parentNode.removeChild(script);
-        cb(data);
-      }
-      window[name] = finish;
-      script.onerror = function () { finish({ ok: false, error: 'network' }); };
-      script.src = LEAD_ENDPOINT + '?action=list&key=' + encodeURIComponent(key) +
-                   '&callback=' + name + '&t=' + Date.now();
-      document.head.appendChild(script);
-    }
+        th {
+            background-color: var(--table-header-bg);
+            color: var(--primary-orange);
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-    function errorText(code) {
-      if (code === 'bad_key') return 'كلمة السر غلط';
-      return 'مقدرتش أوصل للبيانات. اتأكد من الإنترنت وإن كود Apps Script اتحدّث ونُشر كنسخة جديدة.';
-    }
+        tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background-color 0.2s ease;
+        }
 
-    function fmt(iso) {
-      var d = new Date(iso);
-      if (isNaN(d)) return String(iso || '');
-      return d.toLocaleString('ar-EG', { timeZone: 'Africa/Cairo', dateStyle: 'medium', timeStyle: 'short' });
-    }
+        tr:hover {
+            background-color: rgba(255, 85, 0, 0.05);
+        }
 
-    function waLink(phone) { return 'https://wa.me/2' + phone.replace(/\D/g, ''); }
+        td {
+            color: var(--text-main);
+        }
 
-    function render() {
-      var q = $('search').value.trim().toLowerCase();
-      var list = $('list');
-      list.innerHTML = '';
+        .exercise-name {
+            font-weight: 700;
+        }
 
-      var shown = rows.filter(function (r) {
-        return !q || r.name.toLowerCase().indexOf(q) > -1 || r.phone.indexOf(q) > -1;
-      });
+        .exercise-en {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: block;
+        }
 
-      if (!shown.length) {
-        var e = document.createElement('div');
-        e.className = 'empty';
-        e.textContent = rows.length ? 'مفيش نتايج للبحث ده' : 'لسه محدش سجل';
-        list.appendChild(e);
-        return;
-      }
+        .highlight-badge {
+            background: rgba(255, 85, 0, 0.2);
+            color: var(--primary-orange);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            display: inline-block;
+        }
 
-      shown.forEach(function (r, i) {
-        var item = document.createElement('div'); item.className = 'item';
-        item.style.setProperty('--i', Math.min(i, 12));
+        /* الملاحظات */
+        .workout-notes {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
 
-        var who = document.createElement('div'); who.className = 'who';
-        var n = document.createElement('strong'); n.textContent = r.name;
-        var t = document.createElement('small'); t.textContent = fmt(r.time);
-        who.appendChild(n); who.appendChild(t);
+        .notes-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            margin-bottom: 8px;
+        }
 
-        var ph = document.createElement('div'); ph.className = 'phone'; ph.textContent = r.phone;
+        .notes-list {
+            list-style: none;
+            padding: 0;
+        }
 
-        var acts = document.createElement('div'); acts.className = 'acts';
+        .notes-list li {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            position: relative;
+            padding-right: 18px;
+        }
 
-        var wa = document.createElement('a');
-        wa.className = 'chip wa'; wa.textContent = 'واتساب';
-        wa.href = waLink(r.phone); wa.target = '_blank'; wa.rel = 'noopener';
+        .notes-list li::before {
+            content: "•";
+            color: var(--primary-orange);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
 
-        var call = document.createElement('a');
-        call.className = 'chip'; call.textContent = 'اتصال'; call.href = 'tel:' + r.phone;
+        @media (max-width: 600px) {
+            .card-title {
+                font-size: 1.4rem;
+            }
+            th, td {
+                padding: 10px 8px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
 
-        var copy = document.createElement('button');
-        copy.className = 'chip'; copy.type = 'button'; copy.textContent = 'نسخ';
-        copy.addEventListener('click', function () {
-          var ok = function () { copy.textContent = 'تم ✓'; setTimeout(function () { copy.textContent = 'نسخ'; }, 1400); };
-          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(r.phone).then(ok);
-          else { var x = document.createElement('textarea'); x.value = r.phone; document.body.appendChild(x); x.select(); document.execCommand('copy'); document.body.removeChild(x); ok(); }
-        });
+<div class="container">
 
-        acts.appendChild(wa); acts.appendChild(call); acts.appendChild(copy);
-        item.appendChild(who); item.appendChild(ph); item.appendChild(acts);
-        list.appendChild(item);
-      });
-    }
+    <!-- Push Day Card -->
+    <div class="workout-card">
+        <div class="card-header">
+            <h2 class="card-title">1. تمرين بوش (PUSH DAY)</h2>
+            <span class="card-subtitle">الصدر - الكتف الأمامي والجانبي - الترايسبس</span>
+        </div>
 
-    function stats() {
-      var now = Date.now();
-      var startToday = new Date(); startToday.setHours(0, 0, 0, 0);
-      var today = 0, week = 0;
-      rows.forEach(function (r) {
-        var ts = new Date(r.time).getTime();
-        if (ts >= startToday.getTime()) today++;
-        if (now - ts <= 7 * 864e5) week++;
-      });
-      $('s-total').textContent = rows.length;
-      $('s-today').textContent = today;
-      $('s-week').textContent = week;
-    }
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>التمرين</th>
+                        <th>العضلة المستهدفة</th>
+                        <th>المجموعات × العدات</th>
+                        <th>الراحة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <span class="exercise-name">تجميع بالبار/دمبل على بنش مائل</span>
+                            <span class="exercise-en">Incline Press</span>
+                        </td>
+                        <td>الصدر العلوي</td>
+                        <td><span class="highlight-badge">3 × 8 - 10</span></td>
+                        <td>2 - 3 دقائق</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <span class="exercise-name">تجميع بنش مستوي بالدمبل</span>
+                            <span class="exercise-en">Flat Dumbbell Press</span>
+                        </td>
+                        <td>الصدر الأوسط والكامل</td>
+                        <td><span class="highlight-badge">3 × 8 - 12</span></td>
+                        <td>2 دقيقة</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <span class="exercise-name">تجميع/تفتيح كابل سفلي إلى أعلى</span>
+                            <span class="exercise-en">Cable Crossover</span>
+                        </td>
+                        <td>الصدر السفلي والداخلي</td>
+                        <td><span class="highlight-badge">3 × 12 - 15</span></td>
+                        <td>90 ثانية</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <span class="exercise-name">ضغط كتف جالس بالدمبل</span>
+                            <span class="exercise-en">Seated Dumbbell Shoulder Press</span>
+                        </td>
+                        <td>الكتف الأمامي</td>
+                        <td><span class="highlight-badge">3 × 8 - 10</span></td>
+                        <td>2 دقيقة</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <span class="exercise-name">رفرفة جانبي بالكابل أو الدمبل</span>
+                            <span class="exercise-en">Lateral Raises</span>
+                        </td>
+                        <td>الكتف الجانبي</td>
+                        <td><span class="highlight-badge">4 × 12 - 15</span></td>
+                        <td>60 - 90 ثانية</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <span class="exercise-name">دفع ترايسبس بالكابل مسكة V</span>
+                            <span class="exercise-en">Triceps Cable Pushdown</span>
+                        </td>
+                        <td>الترايسبس (الرأس الخارجي)</td>
+                        <td><span class="highlight-badge">3 × 10 - 12</span></td>
+                        <td>90 ثانية</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            <span class="exercise-name">ترايسبس خلف الرأس بالدمبل/كابل</span>
+                            <span class="exercise-en">Overhead Triceps Extension</span>
+                        </td>
+                        <td>الترايسبس (الرأس الطويل)</td>
+                        <td><span class="highlight-badge">3 × 12 - 15</span></td>
+                        <td>90 ثانية</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    function apply(data) {
-      rows = (data.rows || []).slice().sort(function (a, b) { return new Date(b.time) - new Date(a.time); });
-      stats(); render();
-      $('meta').textContent = data.tabs
-        ? 'مصدر البيانات: ' + data.tabs.map(function (t) { return t.name + ' (' + t.count + ')'; }).join('، ')
-        : '';
-      if (!data.version) {
-        $('app-msg').textContent = 'كود Apps Script المنشور قديم. الصق الكود الجديد، وبعدين Deploy ← Manage deployments ← القلم ← New version ← Deploy.';
-      }
-    }
+        <div class="workout-notes">
+            <h3 class="notes-title">تعليمات الهامّة:</h3>
+            <ul class="notes-list">
+                <li>ابدأ بإحماء ديناميكي للجزء العلوي ومجموعة خفيفة قبل الأوزان الفعالة.</li>
+                <li>اختر وزناً يوصلك للتحمّل المطلوب مع الحفاظ على التكنيك الصحيح.</li>
+            </ul>
+        </div>
+    </div>
 
-    window.showAdmin = function (key, data) {
-      adminKey = key;
-      $('gate').hidden = true;
-      document.body.classList.remove('locked');
-      document.body.classList.add('admin-mode');
-      $('admin-app').hidden = false;
-      $('app-msg').textContent = '';
-      apply(data);
-      window.scrollTo(0, 0);
-    };
+    <!-- Pull Day Card -->
+    <div class="workout-card">
+        <div class="card-header">
+            <h2 class="card-title">2. تمرين بول (PULL DAY)</h2>
+            <span class="card-subtitle">الظهر بالكامل - الكتف الخلفي - البايسبس</span>
+        </div>
 
-    // زر الانتقال للصفحة الرئيسية من داخل لوحة الأدمن
-    $('btn-go-home').addEventListener('click', function () {
-      document.body.classList.remove('admin-mode');
-      $('admin-app').hidden = true;
-      if (window.initReveal) window.initReveal();
-      window.scrollTo(0, 0);
-    });
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>التمرين</th>
+                        <th>العضلة المستهدفة</th>
+                        <th>المجموعات × العدات</th>
+                        <th>الراحة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <span class="exercise-name">سحب عالي واسع بالواير</span>
+                            <span class="exercise-en">Lat Pulldown</span>
+                        </td>
+                        <td>الظهر العلوي والعرض (Lats)</td>
+                        <td><span class="highlight-badge">3 × 8 - 12</span></td>
+                        <td>2 دقيقة</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <span class="exercise-name">سحب أرضي مسكة ضيقة</span>
+                            <span class="exercise-en">Seated Cable Row</span>
+                        </td>
+                        <td>منتصف الظهر وكثافته</td>
+                        <td><span class="highlight-badge">3 × 8 - 10</span></td>
+                        <td>2 دقيقة</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <span class="exercise-name">سحب بالبار أو الدمبل فردي</span>
+                            <span class="exercise-en">Single-Arm Dumbbell Row</span>
+                        </td>
+                        <td>الظهر السفلي والجانبي</td>
+                        <td><span class="highlight-badge">3 × 10 - 12</span></td>
+                        <td>90 ثانية</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <span class="exercise-name">رفرفة خلفي بالكابل أو الفراش</span>
+                            <span class="exercise-en">Reverse Flyes</span>
+                        </td>
+                        <td>الكتف الخلفي (Rear Delts)</td>
+                        <td><span class="highlight-badge">4 × 12 - 15</span></td>
+                        <td>60 - 90 ثانية</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <span class="exercise-name">تبادل بايسبس بالدمبل جالس</span>
+                            <span class="exercise-en">Seated Dumbbell Bicep Curl</span>
+                        </td>
+                        <td>البايسبس (الرأسين)</td>
+                        <td><span class="highlight-badge">3 × 10 - 12</span></td>
+                        <td>90 ثانية</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <span class="exercise-name">بايسبس هامر بالدمبل أو الكابل</span>
+                            <span class="exercise-en">Hammer Curls</span>
+                        </td>
+                        <td>عضلة الهامر والساعد</td>
+                        <td><span class="highlight-badge">3 × 10 - 12</span></td>
+                        <td>90 ثانية</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    $('refresh').addEventListener('click', function () {
-      var btn = $('refresh'); btn.disabled = true; btn.textContent = 'جاري التحديث…';
-      load(adminKey, function (data) {
-        btn.disabled = false; btn.textContent = 'تحديث';
-        if (!data.ok) { $('app-msg').textContent = errorText(data.error); return; }
-        $('app-msg').textContent = '';
-        apply(data);
-      });
-    });
+        <div class="workout-notes">
+            <h3 class="notes-title">تعليمات الهامّة:</h3>
+            <ul class="notes-list">
+                <li>اسحب بكوعك دائماً لضمان تفعيل كامل لعضلات الظهر وتقليل الضغط على الساعد.</li>
+                <li>اهتم بالمدى الحركي الكامل والعصر العضلي في نهاية السحب.</li>
+            </ul>
+        </div>
+    </div>
 
-    $('logout').addEventListener('click', function () { window.location.reload(); });
-    $('search').addEventListener('input', render);
+    <!-- Legs Day Card -->
+    <div class="workout-card">
+        <div class="card-header">
+            <h2 class="card-title">3. تمرين رجل (LEGS DAY)</h2>
+            <span class="card-subtitle">العضلة الرباعية - الخلفيات - المقعدة - السمانة</span>
+        </div>
 
-    $('csv').addEventListener('click', function () {
-      var esc = function (s) { return '"' + String(s).replace(/"/g, '""') + '"'; };
-      var lines = ['الوقت,الاسم,الرقم'];
-      rows.forEach(function (r) { lines.push([esc(fmt(r.time)), esc(r.name), '="' + r.phone + '"'].join(',')); });
-      var blob = new Blob(['\uFEFF' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'captain-pop-leads.csv';
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
-    });
-  })();
-</script>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>التمرين</th>
+                        <th>العضلة المستهدفة</th>
+                        <th>المجموعات × العدات</th>
+                        <th>الراحة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <span class="exercise-name">سكوات بالبار خلفي</span>
+                            <span class="exercise-en">Barbell Back Squat</span>
+                        </td>
+                        <td>الفخذ الأمامي والمقعدة</td>
+                        <td><span class="highlight-badge">3 × 8 - 10</span></td>
+                        <td>2 - 3 دقائق</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <span class="exercise-name">دفع بالرجل على الماكينة</span>
+                            <span class="exercise-en">Leg Press</span>
+                        </td>
+                        <td>الفخذ الأمامي بالكامل</td>
+                        <td><span class="highlight-badge">3 × 10 - 12</span></td>
+                        <td>2 دقيقة</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <span class="exercise-name">تمديد أرجل على الماكينة</span>
+                            <span class="exercise-en">Leg Extension</span>
+                        </td>
+                        <td>العضلة الرباعية الأمامية</td>
+                        <td><span class="highlight-badge">3 × 12 - 15</span></td>
+                        <td>90 ثانية</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <span class="exercise-name">ثني أرجل خلفي جالس/مستلقي</span>
+                            <span class="exercise-en">Lying/Seated Leg Curl</span>
+                        </td>
+                        <td>الفخذ الخلفي (Hamstrings)</td>
+                        <td><span class="highlight-badge">4 × 10 - 12</span></td>
+                        <td>90 ثانية</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <span class="exercise-name">طعن أمامي بالدمبل</span>
+                            <span class="exercise-en">Dumbbell Lunges</span>
+                        </td>
+                        <td>الفخذ الأمامي، الخلفي والمقعدة</td>
+                        <td><span class="highlight-badge">3 × 10 - 12</span></td>
+                        <td>90 ثانية</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <span class="exercise-name">سمانة واقف على الماكينة</span>
+                            <span class="exercise-en">Standing Calf Raises</span>
+                        </td>
+                        <td>عضلات السمانة (Calves)</td>
+                        <td><span class="highlight-badge">4 × 12 - 15</span></td>
+                        <td>60 - 90 ثانية</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="workout-notes">
+            <h3 class="notes-title">تعليمات الهامّة:</h3>
+            <ul class="notes-list">
+                <li>سخّن مفصل الركبة والورك جيداً قبل أداء السكوات بالأوزان الثقيلة.</li>
+                <li>حافظ على التنفس الصحيح: شهيق عند النزول، وزفير بقوة أثناء الدفع.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
 
 </body>
 </html>
