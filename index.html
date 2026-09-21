@@ -486,6 +486,45 @@
   .scroll-cue svg { width: 26px; height: 26px; }
   body:not(.locked) .scroll-cue { animation: cue 1.8s 1.6s ease-in-out infinite; }
 
+  /* Push / Pull / Legs button */
+  .btn-ppl {
+    position: relative;
+    overflow: hidden;
+    direction: ltr;
+    gap: 12px;
+    padding: 10px 26px 10px 12px;
+    color: #fff;
+    letter-spacing: .3px;
+    border: 2px solid rgba(255,255,255,.9);
+    background: linear-gradient(135deg, #ff4d00, #ff9a00);
+    box-shadow: 0 10px 30px rgba(255,120,0,.45);
+  }
+  .btn-ppl:hover { box-shadow: 0 14px 38px rgba(255,140,0,.7); }
+  .ppl-ico {
+    flex: none;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    background: #fff;
+    color: var(--orange);
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .ppl-ico svg { width: 22px; height: 22px; }
+  .btn-ppl:hover .ppl-ico svg { animation: lift .6s ease; }
+  .btn-ppl::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    left: -90px;
+    width: 60px;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.6), transparent);
+    transform: skewX(-20deg);
+    animation: shine 3.2s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes shine { 0%, 55% { left: -90px; } 100% { left: 120%; } }
+  @keyframes lift  { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-20deg); } 75% { transform: rotate(20deg); } }
+
   /* scroll reveal (classes added by JS) */
   .reveal:not(.in) { opacity: 0; translate: 0 26px; }
   .reveal.in { animation: revealIn .7s cubic-bezier(.2,.7,.2,1) both; animation-delay: var(--d, 0s); }
@@ -672,9 +711,11 @@
       <a class="btn btn-ghost" href="https://ehabpopelshrif.github.io/before_after/" target="_blank" rel="noopener">
         📸 نتائج وتحولات المشتركين
       </a>
-      <a class="btn btn-ghost" href="https://ehabpopelshrif.github.io/Push-Pull-Legs/" target="_blank" rel="noopener">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 6.5v11M17.5 6.5v11M3 9v6M21 9v6M6.5 12h11"/></svg>
-        برنامج تدريب Push / Pull / Legs
+      <a class="btn btn-ppl" href="https://ehabpopelshrif.github.io/Push-Pull-Legs/" target="_blank" rel="noopener">
+        <span class="ppl-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 6.5v11M17.5 6.5v11M3 9v6M21 9v6M6.5 12h11"/></svg>
+        </span>
+        <span>Push / Pull / Legs</span>
       </a>
     </div>
   </div>
