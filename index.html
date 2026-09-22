@@ -254,6 +254,90 @@
   }
   .gate-verified svg { width: 15px; height: 15px; }
 
+  /* ========== QUIZ CTA ========== */
+  .quiz-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 32px 30px;
+    background: linear-gradient(135deg, #1f1f1f, #171717);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .quiz-banner::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 88% 12%, rgba(255,77,0,.22), transparent 60%);
+    pointer-events: none;
+  }
+  .quiz-banner-text { position: relative; z-index: 1; max-width: 46ch; }
+  .quiz-banner-text h3 { font-family: var(--display); font-weight: 900; font-size: 1.4rem; margin: 0 0 8px; }
+  .quiz-banner-text p { color: var(--muted); margin: 0; }
+  .quiz-banner .btn { position: relative; z-index: 1; white-space: nowrap; }
+  .quiz-banner .btn .ppl-lock { margin-inline-start: 6px; font-size: 1rem; }
+
+  /* ========== QUESTIONNAIRE PAGE ========== */
+  body.quiz-mode > .hero,
+  body.quiz-mode > main,
+  body.quiz-mode > footer,
+  body.quiz-mode > .float-wa { display: none; }
+  body.quiz-mode .navbar { display: none; }
+
+  #quiz-page[hidden] { display: none !important; }
+  #quiz-page { min-height: 100svh; background: var(--ink); }
+  #quiz-page .qp-bar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(14,14,14,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  #quiz-page .qp-bar-in { display: flex; align-items: center; gap: 12px; padding: 14px 0; }
+  .qp-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--display); font-weight: 800; font-size: .95rem;
+    color: var(--text); background: transparent; border: 1.5px solid var(--line);
+    border-radius: 999px; padding: 9px 18px; cursor: pointer;
+  }
+  .qp-back:hover { border-color: var(--ember); color: var(--ember); }
+  .qp-title { font-family: var(--display); font-weight: 900; font-size: 1.05rem; margin-inline-start: auto; }
+
+  .qp-hero {
+    padding: 54px 20px 44px;
+    text-align: center;
+    background: linear-gradient(160deg, var(--orange), #c93a00);
+  }
+  .qp-hero .q-ico {
+    width: 64px; height: 64px; border-radius: 18px;
+    background: rgba(255,255,255,.18);
+    display: grid; place-items: center; margin: 0 auto 16px; color: #fff;
+  }
+  .qp-hero .q-ico svg { width: 32px; height: 32px; }
+  .qp-hero h1 { color: #fff; font-family: var(--display); font-weight: 900; font-size: clamp(1.7rem, 5vw, 2.4rem); margin: 0 0 10px; }
+  .qp-hero p { color: rgba(255,255,255,.9); max-width: 52ch; margin: 0 auto; }
+
+  .qp-form-wrap { max-width: 640px; margin: -30px auto 0; padding: 0 20px 90px; position: relative; z-index: 2; }
+  .qp-card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 24px;
+    padding: 32px 28px; box-shadow: 0 30px 80px rgba(0,0,0,.5);
+  }
+  .qp-card .btn { width: 100%; margin-top: 6px; }
+
+  .quiz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+  @media (max-width: 420px) { .quiz-grid { grid-template-columns: 1fr; } }
+  .qfield { text-align: right; margin-bottom: 14px; }
+  .qfield label { display: block; font-weight: 600; font-size: .92rem; margin-bottom: 6px; }
+  .qfield input, .qfield select, .qfield textarea {
+    width: 100%; padding: 12px 14px; font: inherit; color: var(--text); background: var(--ink);
+    border: 1.5px solid var(--line); border-radius: 12px;
+  }
+  .qfield textarea { resize: vertical; font-family: var(--body); }
+  .qfield input:focus, .qfield select:focus, .qfield textarea:focus {
+    outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,77,0,.25);
+  }
+
   /* ========== WHY CHOOSE ========== */
   .why {
     display: grid;
@@ -1003,6 +1087,22 @@
     </div>
   </section>
 
+  <!-- ========== QUIZ CTA ========== -->
+  <section id="quiz-cta">
+    <div class="wrap">
+      <div class="quiz-banner">
+        <div class="quiz-banner-text">
+          <h3>🎯 عايز نظام غذائي وتدريبي مخصص ليك؟</h3>
+          <p>املأ الاستبيان بمعلوماتك، والإجابات هتوصلني منظمة على واتساب عشان أظبطلك خطتك بالظبط.</p>
+        </div>
+        <button type="button" class="btn btn-primary" data-prog="quiz">
+          املأ الاستبيان
+          <span class="ppl-lock" aria-hidden="true">🔒</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
   <!-- ========== WHY CHOOSE ========== -->
   <section id="why">
     <div class="wrap">
@@ -1211,6 +1311,87 @@
   </div>
 </div>
 
+<!-- ========== QUESTIONNAIRE PAGE ========== -->
+<div id="quiz-page" hidden>
+  <header class="qp-bar">
+    <div class="wrap qp-bar-in">
+      <button type="button" class="qp-back" id="quiz-back">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        رجوع للموقع
+      </button>
+      <span class="qp-title">استبيان النظام الغذائي</span>
+    </div>
+  </header>
+
+  <div class="qp-hero">
+    <div class="q-ico" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6a1 1 0 0 1 1 1v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h1V4a1 1 0 0 1 1-1z"/><path d="M9 12h6M9 16h4"/></svg>
+    </div>
+    <h1>استبيان النظام الغذائي والتدريبي</h1>
+    <p>جاوب بدقة، والإجابات هتتبعت لي على واتساب علطول عشان أظبطلك خطتك.</p>
+  </div>
+
+  <div class="qp-form-wrap">
+    <div class="qp-card">
+      <form id="quiz-form" novalidate>
+        <div class="quiz-grid">
+          <div class="qfield">
+            <label for="q-age">السن</label>
+            <input id="q-age" type="number" min="10" max="90" inputmode="numeric" placeholder="مثال: 25">
+          </div>
+          <div class="qfield">
+            <label for="q-height">الطول (سم)</label>
+            <input id="q-height" type="number" min="100" max="230" inputmode="numeric" placeholder="مثال: 175">
+          </div>
+        </div>
+        <div class="quiz-grid">
+          <div class="qfield">
+            <label for="q-weight">الوزن الحالي (كجم)</label>
+            <input id="q-weight" type="number" min="30" max="250" step="0.1" inputmode="decimal" placeholder="مثال: 80">
+          </div>
+          <div class="qfield">
+            <label for="q-days">أيام التمرين بالأسبوع</label>
+            <input id="q-days" type="number" min="0" max="7" inputmode="numeric" placeholder="مثال: 4">
+          </div>
+        </div>
+        <div class="qfield">
+          <label for="q-goal">الهدف</label>
+          <select id="q-goal">
+            <option value="">اختار...</option>
+            <option>نزول وزن (تنشيف)</option>
+            <option>زيادة كتلة عضلية</option>
+            <option>شد عام ولياقة</option>
+            <option>تحسين الأداء الرياضي</option>
+          </select>
+        </div>
+        <div class="qfield">
+          <label for="q-activity">مستوى النشاط اليومي</label>
+          <select id="q-activity">
+            <option value="">اختار...</option>
+            <option>قليل الحركة (شغل مكتبي)</option>
+            <option>متوسط الحركة</option>
+            <option>نشاط عالي / مجهود بدني</option>
+          </select>
+        </div>
+        <div class="qfield">
+          <label for="q-allergy">حساسية أو ممنوعات غذائية</label>
+          <input id="q-allergy" type="text" placeholder="اكتب لا يوجد لو مفيش">
+        </div>
+        <div class="qfield">
+          <label for="q-health">أمراض مزمنة أو حالات صحية</label>
+          <input id="q-health" type="text" placeholder="اكتب لا يوجد لو مفيش">
+        </div>
+        <div class="qfield">
+          <label for="q-notes">ملاحظات إضافية</label>
+          <textarea id="q-notes" rows="3" placeholder="أي تفاصيل تانية حابب تقولها"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" id="quiz-submit">إرسال الإجابات على واتساب</button>
+      </form>
+      <div class="gate-msg" id="quiz-msg" role="alert" style="margin-top:12px"></div>
+    </div>
+  </div>
+</div>
+
 <!-- ========== ADMIN DASHBOARD ========== -->
 <div id="admin-app" hidden>
   <header class="bar">
@@ -1304,7 +1485,7 @@
     document.head.appendChild(s);
   }
 
-  // ===== برامج التدريب: بتفتح بكود اشتراك بس =====
+  // ===== برامج التدريب + الاستبيان: بتفتح بكود اشتراك بس =====
   (function () {
     var CODE_KEY = 'captainpop_code';
     var box = document.getElementById('codebox');
@@ -1312,10 +1493,11 @@
     var msg = document.getElementById('code-msg');
     var btn = document.getElementById('code-btn');
     var pending = null;
+    var quizPage = document.getElementById('quiz-page');
 
     function normalize(v) { return String(v || '').toUpperCase().replace(/[^A-Z0-9]/g, ''); }
     function setLocks(open) {
-      document.querySelectorAll('.btn-ppl .ppl-lock').forEach(function (l) { l.textContent = open ? '🔓' : '🔒'; });
+      document.querySelectorAll('[data-prog] .ppl-lock').forEach(function (l) { l.textContent = open ? '🔓' : '🔒'; });
     }
     function openBox(prog, note) {
       pending = prog;
@@ -1325,6 +1507,21 @@
       input.focus();
     }
     function closeBox() { box.hidden = true; pending = null; }
+
+    function openQuiz() {
+      if (!quizPage) return;
+      document.body.classList.remove('locked');
+      document.body.classList.add('quiz-mode');
+      quizPage.hidden = false;
+      window.scrollTo(0, 0);
+      var first = document.getElementById('q-age');
+      if (first) first.focus();
+    }
+    function closeQuiz() {
+      document.body.classList.remove('quiz-mode');
+      if (quizPage) quizPage.hidden = true;
+      window.scrollTo(0, 0);
+    }
 
     // بنفتح تاب فاضي فوراً (عشان المتصفح ما يمنعوش) ونحط فيه الرابط بعد التحقق
     function blankTab() {
@@ -1351,9 +1548,12 @@
         try { saved = localStorage.getItem(CODE_KEY) || ''; } catch (e) {}
         if (!saved) { openBox(prog); return; }
 
-        var w = blankTab();
+        var w = (prog === 'quiz') ? null : blankTab();
         jsonp({ action: 'verify', code: saved }, function (res) {
-          if (res && res.ok && res.links && res.links[prog]) { go(res.links[prog], w); return; }
+          if (res && res.ok) {
+            if (prog === 'quiz') { openQuiz(); return; }
+            if (res.links && res.links[prog]) { go(res.links[prog], w); return; }
+          }
           if (w) { try { w.close(); } catch (e) {} }
           if (res && res.error === 'bad_code') {
             try { localStorage.removeItem(CODE_KEY); } catch (e) {}
@@ -1372,14 +1572,15 @@
       if (code.length < 4) { msg.textContent = 'اكتب الكود من فضلك'; return; }
       msg.textContent = '';
       btn.disabled = true; btn.textContent = 'جاري التحقق…';
-      var w = blankTab();
+      var prog = pending;
+      var w = (prog === 'quiz') ? null : blankTab();
       jsonp({ action: 'verify', code: code }, function (res) {
         btn.disabled = false; btn.textContent = 'فتح النظام التدريبي';
         if (res && res.ok) {
           try { localStorage.setItem(CODE_KEY, code); } catch (err) {}
           setLocks(true);
-          var prog = pending;
           closeBox();
+          if (prog === 'quiz') { openQuiz(); return; }
           if (prog && res.links && res.links[prog]) go(res.links[prog], w);
           else if (w) { try { w.close(); } catch (err) {} }
         } else {
@@ -1394,7 +1595,62 @@
     document.getElementById('codebox-x').addEventListener('click', closeBox);
     document.getElementById('codebox-plans').addEventListener('click', closeBox);
     box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) closeBox(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      if (!box.hidden) closeBox();
+    });
+
+    // ===== إرسال إجابات الاستبيان على واتساب =====
+    var quizForm = document.getElementById('quiz-form');
+    var quizMsg = document.getElementById('quiz-msg');
+    var quizBack = document.getElementById('quiz-back');
+    if (quizBack) quizBack.addEventListener('click', closeQuiz);
+
+    if (quizForm) {
+      quizForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var val = function (id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+        var age = val('q-age'), height = val('q-height'), weight = val('q-weight'), goal = val('q-goal');
+
+        if (!age || !height || !weight || !goal) {
+          quizMsg.textContent = 'من فضلك املأ السن والطول والوزن والهدف على الأقل';
+          return;
+        }
+        quizMsg.textContent = '';
+
+        var visitor = null;
+        try { visitor = JSON.parse(localStorage.getItem('captainpop_visitor') || 'null'); } catch (err) {}
+        var name = visitor && visitor.name ? visitor.name : '';
+        var phone = visitor && visitor.phone ? visitor.phone : '';
+
+        var activity = val('q-activity') || 'لا يوجد';
+        var days = val('q-days') || 'لا يوجد';
+        var allergy = val('q-allergy') || 'لا يوجد';
+        var health = val('q-health') || 'لا يوجد';
+        var notes = val('q-notes') || 'لا يوجد';
+
+        var lines = [
+          '📋 استبيان نظام غذائي وتدريبي',
+          '👤 الاسم: ' + (name || 'غير مسجل'),
+          '📱 الرقم: ' + (phone || 'غير مسجل'),
+          '',
+          '🔢 السن: ' + age,
+          '📏 الطول: ' + height + ' سم',
+          '⚖️ الوزن الحالي: ' + weight + ' كجم',
+          '🎯 الهدف: ' + goal,
+          '🏃 مستوى النشاط: ' + activity,
+          '🏋️ أيام التمرين بالأسبوع: ' + days,
+          '⚠️ حساسية / ممنوعات غذائية: ' + allergy,
+          '❤️ أمراض مزمنة أو حالات صحية: ' + health,
+          '📝 ملاحظات إضافية: ' + notes
+        ];
+
+        var text = lines.join('\n');
+        var url = 'https://wa.me/201555557031?text=' + encodeURIComponent(text);
+        closeQuiz();
+        window.location.href = url;
+      });
+    }
   })();
 
   // ===== شريط التنقل العلوي =====
