@@ -860,6 +860,8 @@
   #admin-app .chip:hover { border-color: var(--ember); color: var(--ember); }
   #admin-app .chip.wa { background: #1ea952; border-color: #1ea952; color: #fff; }
   #admin-app .chip.wa:hover { background: #22c15d; border-color: #22c15d; color: #fff; }
+  #admin-app .chip.sub { background: var(--orange); border-color: var(--orange); color: #fff; }
+  #admin-app .chip.sub:hover { background: var(--ember); border-color: var(--ember); color: #fff; }
   #admin-app .empty { text-align: center; color: var(--muted); padding: 50px 0; }
   @media (max-width: 560px) {
     #admin-app .stat b { font-size: 1.6rem; }
@@ -1972,7 +1974,25 @@
           else { var x = document.createElement('textarea'); x.value = r.phone; document.body.appendChild(x); x.select(); document.execCommand('copy'); document.body.removeChild(x); ok(); }
         });
 
-        acts.appendChild(wa); acts.appendChild(call); acts.appendChild(copy);
+        var sub = document.createElement('button');
+        sub.className = 'chip sub'; sub.type = 'button'; sub.title = 'إنشاء كود اشتراك للعميل ده';
+        sub.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-inline-end:4px" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg>اشتراك';
+        sub.addEventListener('click', function () {
+          var codesTab = document.querySelector('.atab[data-atab="codes"]');
+          if (codesTab) codesTab.click();
+          var cName = $('c-name'), cPhone = $('c-phone');
+          if (cName) cName.value = r.name;
+          if (cPhone) cPhone.value = r.phone;
+          if ($('c-msg')) $('c-msg').textContent = '';
+          if ($('c-result')) $('c-result').hidden = true;
+          setTimeout(function () {
+            var issue = document.querySelector('#pane-codes .issue');
+            if (issue) issue.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (cName) cName.focus();
+          }, 60);
+        });
+
+        acts.appendChild(wa); acts.appendChild(call); acts.appendChild(copy); acts.appendChild(sub);
         item.appendChild(who); item.appendChild(ph); item.appendChild(acts);
         list.appendChild(item);
       });
