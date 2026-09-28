@@ -932,6 +932,47 @@
   #admin-app .code-tag { direction: ltr; font-family: var(--display); font-weight: 900; font-size: 1.25rem; letter-spacing: 3px; color: var(--orange); }
   #admin-app .item.off { opacity: .5; }
   #admin-app .item.off .code-tag { text-decoration: line-through; }
+
+  /* ===== نتيجة الاستبيان ===== */
+  #quiz-result[hidden] { display: none; }
+  #quiz-result { animation: paneIn .45s ease both; }
+  .res-title { font-family: var(--display); font-weight: 900; font-size: 1.3rem; margin: 0 0 4px; text-align: center; }
+  .res-sub { color: var(--muted); text-align: center; margin: 0 0 20px; font-size: .92rem; }
+  .res-cal { text-align: center; padding: 26px 16px; border-radius: 20px; margin-bottom: 14px;
+    background: linear-gradient(160deg, var(--orange), #c93a00); box-shadow: 0 18px 44px rgba(255,77,0,.28); }
+  .res-cal small { display: block; color: rgba(255,255,255,.9); font-weight: 600; }
+  .res-cal b { display: block; font-family: var(--display); font-weight: 900; font-size: 3.6rem; line-height: 1.15; color: #fff; }
+  .res-cal em { font-style: normal; color: rgba(255,255,255,.9); font-size: .95rem; }
+  .res-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+  .res-tile { background: var(--ink); border: 1px solid var(--line); border-radius: 14px; padding: 14px 6px; text-align: center; }
+  .res-tile b { display: block; font-family: var(--display); font-weight: 900; font-size: 1.35rem; color: var(--orange); line-height: 1.3; }
+  .res-tile span { color: var(--muted); font-size: .8rem; }
+  .res-box { background: var(--ink); border: 1px solid var(--line); border-radius: 16px; padding: 18px 16px; margin-bottom: 14px; }
+  .res-box h4 { font-family: var(--display); font-weight: 800; font-size: 1.05rem; margin: 0 0 14px; }
+  .bmi-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+  .bmi-top b { font-family: var(--display); font-weight: 900; font-size: 1.8rem; }
+  .bmi-tag { font-weight: 700; padding: 3px 14px; border-radius: 999px; font-size: .88rem; color: #fff; }
+  .bmi-scale { direction: ltr; position: relative; height: 10px; border-radius: 99px; margin: 6px 4px 8px;
+    background: linear-gradient(90deg, #3b82f6 0 14%, #22c55e 14% 40%, #f59e0b 40% 60%, #ef4444 60%); }
+  .bmi-mark { position: absolute; top: -6px; width: 5px; height: 22px; border-radius: 3px; background: #fff;
+    box-shadow: 0 0 0 2px var(--ink), 0 2px 8px rgba(0,0,0,.5); transform: translateX(-50%); }
+  .bmi-legend { direction: ltr; display: flex; justify-content: space-between; color: var(--muted); font-size: .74rem; }
+  .mac { margin-bottom: 15px; }
+  .mac:last-child { margin-bottom: 0; }
+  .mac-h { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; font-weight: 600; }
+  .mac-h b { font-family: var(--display); font-weight: 900; font-size: 1.15rem; }
+  .mac-h small { color: var(--muted); font-weight: 400; margin-inline-start: 6px; }
+  .mac-bar { height: 9px; background: var(--line); border-radius: 99px; overflow: hidden; }
+  .mac-bar i { display: block; height: 100%; border-radius: 99px; width: 0; transition: width 1s cubic-bezier(.2,.7,.2,1); }
+  .water-row { display: flex; align-items: center; gap: 14px; }
+  .water-row .ico { font-size: 2rem; }
+  .water-row b { font-family: var(--display); font-weight: 900; font-size: 1.6rem; color: #38bdf8; }
+  .res-note { color: var(--muted); font-size: .8rem; line-height: 1.7; margin: 0 0 16px; text-align: center; }
+  .res-actions { display: grid; gap: 10px; }
+  .btn-wa { background: #1ea952; color: #fff; box-shadow: 0 10px 28px rgba(30,169,82,.35); }
+  .btn-wa:hover { background: #22c15d; }
+  .btn-outline { background: transparent; border-color: var(--line); color: var(--text); }
+  .btn-outline:hover { border-color: var(--ember); color: var(--ember); }
 </style>
 </head>
 <body class="locked">
@@ -1351,6 +1392,14 @@
   <div class="qp-form-wrap">
     <div class="qp-card">
       <form id="quiz-form" novalidate>
+        <div class="qfield">
+          <label for="q-gender">النوع</label>
+          <select id="q-gender">
+            <option value="">اختار...</option>
+            <option value="male">ذكر</option>
+            <option value="female">أنثى</option>
+          </select>
+        </div>
         <div class="quiz-grid">
           <div class="qfield">
             <label for="q-age">السن</label>
@@ -1402,8 +1451,9 @@
           <label for="q-notes">ملاحظات إضافية</label>
           <textarea id="q-notes" rows="3" placeholder="أي تفاصيل تانية حابب تقولها"></textarea>
         </div>
-        <button class="btn btn-primary" type="submit" id="quiz-submit">إرسال الإجابات على واتساب</button>
+        <button class="btn btn-primary" type="submit" id="quiz-submit">احسب احتياجي</button>
       </form>
+      <div id="quiz-result" hidden></div>
       <div class="gate-msg" id="quiz-msg" role="alert" style="margin-top:12px"></div>
     </div>
   </div>
@@ -1531,12 +1581,15 @@
       document.body.classList.add('quiz-mode');
       quizPage.hidden = false;
       window.scrollTo(0, 0);
-      var first = document.getElementById('q-age');
+      var first = document.getElementById('q-gender');
       if (first) first.focus();
     }
     function closeQuiz() {
       document.body.classList.remove('quiz-mode');
       if (quizPage) quizPage.hidden = true;
+      var qr = document.getElementById('quiz-result'), qf = document.getElementById('quiz-form');
+      if (qr) qr.hidden = true;
+      if (qf) qf.hidden = false;
       window.scrollTo(0, 0);
     }
 
@@ -1617,55 +1670,201 @@
       if (!box.hidden) closeBox();
     });
 
-    // ===== إرسال إجابات الاستبيان على واتساب =====
+    // ===== حساب الاحتياج + إرسال النتيجة على واتساب =====
     var quizForm = document.getElementById('quiz-form');
     var quizMsg = document.getElementById('quiz-msg');
     var quizBack = document.getElementById('quiz-back');
+    var quizRes = document.getElementById('quiz-result');
     if (quizBack) quizBack.addEventListener('click', closeQuiz);
+
+    function r1(n) { return Math.round(n * 10) / 10; }
+    function r5(n) { return Math.round(n / 5) * 5; }
+
+    function calcPlan(d) {
+      var w = d.weight, h = d.height, a = d.age, male = d.gender === 'male';
+
+      // BMI
+      var bmi = w / Math.pow(h / 100, 2);
+      var bmiCat, bmiColor;
+      if (bmi < 18.5)      { bmiCat = 'نحافة';       bmiColor = '#3b82f6'; }
+      else if (bmi < 25)   { bmiCat = 'وزن طبيعي';   bmiColor = '#22c55e'; }
+      else if (bmi < 30)   { bmiCat = 'وزن زائد';    bmiColor = '#f59e0b'; }
+      else                 { bmiCat = 'سمنة';        bmiColor = '#ef4444'; }
+
+      // BMR - Harris-Benedict (Revised)
+      var bmr = male
+        ? 88.362 + 13.397 * w + 4.799 * h - 5.677 * a
+        : 447.593 + 9.247 * w + 3.098 * h - 4.330 * a;
+
+      // TDEE حسب النشاط
+      var mult = 1.55, actName = 'متوسط الحركة';
+      if (d.activity.indexOf('قليل') === 0)      { mult = 1.375; actName = 'قليل الحركة'; }
+      else if (d.activity.indexOf('نشاط') === 0) { mult = 1.725; actName = 'نشاط عالي'; }
+      var tdee = bmr * mult;
+
+      // الهدف
+      var adj = 0, pk = 1.8;
+      if (d.goal.indexOf('نزول') === 0)        { adj = -0.20; pk = 2.2; }
+      else if (d.goal.indexOf('زيادة') === 0)  { adj = 0.12;  pk = 2.0; }
+      else if (d.goal.indexOf('تحسين') === 0)  { adj = 0.05;  pk = 1.8; }
+      var target = tdee * (1 + adj);
+      if (target < bmr) target = bmr; // مانزلش تحت الـ BMR
+      target = r5(target);
+
+      // الماكروز
+      var protein = Math.round(w * pk);
+      var fat = Math.round(target * 0.25 / 9);
+      var carbs = Math.max(0, Math.round((target - protein * 4 - fat * 9) / 4));
+      var fiber = Math.round(target / 1000 * 14);
+
+      // المياه
+      var water = r1(w * 0.035 + (d.days >= 3 ? 0.5 : 0));
+
+      return {
+        bmi: r1(bmi), bmiCat: bmiCat, bmiColor: bmiColor,
+        bmr: Math.round(bmr), tdee: Math.round(tdee), mult: mult, actName: actName,
+        adj: adj, target: target,
+        protein: protein, carbs: carbs, fat: fat, fiber: fiber, water: water,
+        pKcal: protein * 4, cKcal: carbs * 4, fKcal: fat * 9
+      };
+    }
+
+    function goalLine(p) {
+      if (p.adj < 0) return 'عجز ' + Math.abs(Math.round(p.adj * 100)) + '% من الـ TDEE';
+      if (p.adj > 0) return 'فائض ' + Math.round(p.adj * 100) + '% من الـ TDEE';
+      return 'سعرات الثبات';
+    }
+
+    function renderResult(d, p) {
+      var pct = function (k) { return Math.round(k / p.target * 100); };
+      var mark = Math.max(2, Math.min(98, (p.bmi - 15) / 25 * 100));
+      quizRes.innerHTML =
+        '<h3 class="res-title">نتيجة حسابك 🎯</h3>' +
+        '<p class="res-sub">' + d.goal + ' · ' + p.actName + '</p>' +
+
+        '<div class="res-cal"><small>سعراتك اليومية المطلوبة</small><b>' + p.target + '</b><em>سعرة حرارية / يوم · ' + goalLine(p) + '</em></div>' +
+
+        '<div class="res-grid">' +
+          '<div class="res-tile"><b>' + p.bmi + '</b><span>BMI</span></div>' +
+          '<div class="res-tile"><b>' + p.bmr + '</b><span>BMR (حرق الراحة)</span></div>' +
+          '<div class="res-tile"><b>' + p.tdee + '</b><span>TDEE (الحرق اليومي)</span></div>' +
+        '</div>' +
+
+        '<div class="res-box"><h4>مؤشر كتلة الجسم</h4>' +
+          '<div class="bmi-top"><b>' + p.bmi + '</b><span class="bmi-tag" style="background:' + p.bmiColor + '">' + p.bmiCat + '</span></div>' +
+          '<div class="bmi-scale"><span class="bmi-mark" style="left:' + mark + '%"></span></div>' +
+          '<div class="bmi-legend"><span>15</span><span>18.5</span><span>25</span><span>30</span><span>40</span></div>' +
+        '</div>' +
+
+        '<div class="res-box"><h4>الماكروز اليومية</h4>' +
+          '<div class="mac"><div class="mac-h"><span>🥩 بروتين</span><span><b>' + p.protein + ' جم</b><small>' + pct(p.pKcal) + '%</small></span></div><div class="mac-bar"><i data-w="' + pct(p.pKcal) + '" style="background:#ff4d00"></i></div></div>' +
+          '<div class="mac"><div class="mac-h"><span>🍚 كارب</span><span><b>' + p.carbs + ' جم</b><small>' + pct(p.cKcal) + '%</small></span></div><div class="mac-bar"><i data-w="' + pct(p.cKcal) + '" style="background:#f59e0b"></i></div></div>' +
+          '<div class="mac"><div class="mac-h"><span>🥑 دهون</span><span><b>' + p.fat + ' جم</b><small>' + pct(p.fKcal) + '%</small></span></div><div class="mac-bar"><i data-w="' + pct(p.fKcal) + '" style="background:#22c55e"></i></div></div>' +
+        '</div>' +
+
+        '<div class="res-grid" style="grid-template-columns:1fr 1fr">' +
+          '<div class="res-box water-row" style="margin:0"><span class="ico">💧</span><div><b>' + p.water + ' لتر</b><br><small style="color:var(--muted)">مياه يومياً</small></div></div>' +
+          '<div class="res-box water-row" style="margin:0"><span class="ico">🌾</span><div><b style="color:var(--ember)">' + p.fiber + ' جم</b><br><small style="color:var(--muted)">ألياف يومياً</small></div></div>' +
+        '</div>' +
+
+        '<p class="res-note" style="margin-top:14px">الحسابات بمعادلة Harris-Benedict المعدّلة وتقديرية، وهتتظبط بشكل أدق مع الكابتن حسب استجابة جسمك.</p>' +
+
+        '<div class="res-actions">' +
+          '<button type="button" class="btn btn-wa" id="res-send">📲 ابعت النتيجة للكابتن على واتساب</button>' +
+          '<button type="button" class="btn btn-outline" id="res-edit">تعديل البيانات</button>' +
+        '</div>';
+
+      quizRes.hidden = false;
+      quizForm.hidden = true;
+      requestAnimationFrame(function () {
+        quizRes.querySelectorAll('.mac-bar i').forEach(function (el) { el.style.width = el.getAttribute('data-w') + '%'; });
+      });
+      window.scrollTo(0, 0);
+
+      document.getElementById('res-edit').addEventListener('click', function () {
+        quizRes.hidden = true; quizForm.hidden = false; window.scrollTo(0, 0);
+      });
+      document.getElementById('res-send').addEventListener('click', function () { sendWA(d, p); });
+    }
+
+   function sendWA(d, p, newTab) {
+      var visitor = null;
+      try { visitor = JSON.parse(localStorage.getItem('captainpop_visitor') || 'null'); } catch (err) {}
+      var name = visitor && visitor.name ? visitor.name : 'غير مسجل';
+      var phone = visitor && visitor.phone ? visitor.phone : 'غير مسجل';
+
+      var lines = [
+        '📋 *استبيان نظام غذائي وتدريبي*',
+        '',
+        '👤 الاسم: ' + name,
+        '📱 الرقم: ' + phone,
+        '',
+        '━━━━━━━━━━━━━━',
+        '*📊 بيانات العميل*',
+        '🚻 النوع: ' + (d.gender === 'male' ? 'ذكر' : 'أنثى'),
+        '🔢 السن: ' + d.age + ' سنة',
+        '📏 الطول: ' + d.height + ' سم',
+        '⚖️ الوزن: ' + d.weight + ' كجم',
+        '🎯 الهدف: ' + d.goal,
+        '🏃 النشاط اليومي: ' + p.actName,
+        '🏋️ أيام التمرين: ' + d.days + ' أيام/أسبوع',
+        '⚠️ حساسية/ممنوعات: ' + d.allergy,
+        '❤️ حالات صحية: ' + d.health,
+        '📝 ملاحظات: ' + d.notes,
+        '',
+        '━━━━━━━━━━━━━━',
+        '*🧮 الحسابات (Harris-Benedict)*',
+        '📐 BMI: ' + p.bmi + ' (' + p.bmiCat + ')',
+        '🔥 BMR: ' + p.bmr + ' سعرة',
+        '⚡ TDEE: ' + p.tdee + ' سعرة (× ' + p.mult + ')',
+        '',
+        '━━━━━━━━━━━━━━',
+        '*🍽️ الاحتياج اليومي*',
+        '🔥 السعرات: *' + p.target + ' سعرة* (' + goalLine(p) + ')',
+        '🥩 البروتين: *' + p.protein + ' جم*',
+        '🍚 الكارب: *' + p.carbs + ' جم*',
+        '🥑 الدهون: *' + p.fat + ' جم*',
+        '🌾 الألياف: ' + p.fiber + ' جم',
+        '💧 المياه: *' + p.water + ' لتر*'
+      ];
+var url = 'https://wa.me/201555557031?text=' + encodeURIComponent(lines.join('\n'));
+if (newTab) {
+  var w = window.open(url, '_blank');
+  if (!w) window.location.href = url; // لو المتصفح منع التاب الجديد
+} else {
+  window.location.href = url;
+}    }
 
     if (quizForm) {
       quizForm.addEventListener('submit', function (e) {
         e.preventDefault();
         var val = function (id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; };
-        var age = val('q-age'), height = val('q-height'), weight = val('q-weight'), goal = val('q-goal');
+        var d = {
+          gender: val('q-gender'),
+          age: parseFloat(val('q-age')),
+          height: parseFloat(val('q-height')),
+          weight: parseFloat(val('q-weight')),
+          goal: val('q-goal'),
+          activity: val('q-activity'),
+          days: parseInt(val('q-days'), 10) || 0,
+          allergy: val('q-allergy') || 'لا يوجد',
+          health: val('q-health') || 'لا يوجد',
+          notes: val('q-notes') || 'لا يوجد'
+        };
 
-        if (!age || !height || !weight || !goal) {
-          quizMsg.textContent = 'من فضلك املأ السن والطول والوزن والهدف على الأقل';
+        if (!d.gender || !d.age || !d.height || !d.weight || !d.goal) {
+          quizMsg.textContent = 'من فضلك املأ النوع والسن والطول والوزن والهدف على الأقل';
+          return;
+        }
+        if (d.age < 10 || d.age > 90 || d.height < 100 || d.height > 230 || d.weight < 30 || d.weight > 250) {
+          quizMsg.textContent = 'راجع الأرقام اللي كتبتها، في قيمة مش منطقية';
           return;
         }
         quizMsg.textContent = '';
-
-        var visitor = null;
-        try { visitor = JSON.parse(localStorage.getItem('captainpop_visitor') || 'null'); } catch (err) {}
-        var name = visitor && visitor.name ? visitor.name : '';
-        var phone = visitor && visitor.phone ? visitor.phone : '';
-
-        var activity = val('q-activity') || 'لا يوجد';
-        var days = val('q-days') || 'لا يوجد';
-        var allergy = val('q-allergy') || 'لا يوجد';
-        var health = val('q-health') || 'لا يوجد';
-        var notes = val('q-notes') || 'لا يوجد';
-
-        var lines = [
-          '📋 استبيان نظام غذائي وتدريبي',
-          '👤 الاسم: ' + (name || 'غير مسجل'),
-          '📱 الرقم: ' + (phone || 'غير مسجل'),
-          '',
-          '🔢 السن: ' + age,
-          '📏 الطول: ' + height + ' سم',
-          '⚖️ الوزن الحالي: ' + weight + ' كجم',
-          '🎯 الهدف: ' + goal,
-          '🏃 مستوى النشاط: ' + activity,
-          '🏋️ أيام التمرين بالأسبوع: ' + days,
-          '⚠️ حساسية / ممنوعات غذائية: ' + allergy,
-          '❤️ أمراض مزمنة أو حالات صحية: ' + health,
-          '📝 ملاحظات إضافية: ' + notes
-        ];
-
-        var text = lines.join('\n');
-        var url = 'https://wa.me/201555557031?text=' + encodeURIComponent(text);
-        closeQuiz();
-        window.location.href = url;
+        var p = calcPlan(d);
+renderResult(d, p);
+sendWA(d, p, true);
+        
       });
     }
   })();
